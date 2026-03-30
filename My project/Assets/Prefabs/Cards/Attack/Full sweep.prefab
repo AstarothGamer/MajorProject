@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1239026588463457143}
   - component: {fileID: 5508621081663610624}
   m_Layer: 5
-  m_Name: Attack
+  m_Name: Full sweep
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.509434, g: 0.16820928, b: 0.16820928, a: 1}
+  m_Color: {r: 0.24432842, g: 0.5999999, b: 0.21169807, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -101,14 +101,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 544a9a2e11840ab4295b0e35accbb029, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Card
-  cardName: Attack
-  description: Deal Damage
+  cardName: Full sweep
+  description: Damage all enemies
   cardType: 0
-  attackTargetMode: 1
+  attackTargetMode: 3
   effects:
     energyCost: 1
     energyGainAfterPlay: 0
-    damage: 5
+    damage: 7
     shieldToPlayerForOneTurn: 0
     playerLoseHp: 0
     healFromDamageMultiplier: 0

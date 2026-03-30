@@ -109,7 +109,7 @@ MonoBehaviour:
     energyCost: 1
     energyGainAfterPlay: 0
     damage: 0
-    shieldToPlayerForOneTurn: 6
+    shieldToPlayerForOneTurn: 4
     playerLoseHp: 0
     healFromDamageMultiplier: 0
   rootCanvas: {fileID: 0}
