@@ -66,6 +66,8 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     private CardHandZone currentHandZone;
     private CardPlayZone playZone;
     private PlayerCombat playerCombat;
+    private DeckManager deckManager;
+    private TurnManager turnManager;
 
     private void Awake()
     {
@@ -78,6 +80,8 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         playZone = FindFirstObjectByType<CardPlayZone>();
         playerCombat = FindFirstObjectByType<PlayerCombat>();
         currentHandZone = GetComponentInParent<CardHandZone>();
+        deckManager = FindFirstObjectByType<DeckManager>();
+        turnManager = FindFirstObjectByType<TurnManager>();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -169,6 +173,10 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         if (playerCombat == null)
         {
             Debug.LogWarning($"Card [{name}] does not PlayerCombat on scene.");
+            return false;
+        }
+        if (turnManager != null && !turnManager.IsPlayerTurn())
+        {
             return false;
         }
 
@@ -312,16 +320,24 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
         FinishPlay();
     }
-
+    
     private void FinishPlay()
     {
         Debug.Log($"Card [{cardName}] has been played.");
-
+        
         // Add VFX and SFX
         // discarding cards 
         // and etc
-
-        Destroy(gameObject);
+        
+        if (deckManager != null)
+        {
+            deckManager.OnCardPlayed(this);
+        }
+        else
+        {
+            Debug.LogWarning("DeckManager not found!");
+            Destroy(gameObject);
+        }
     }
 
     private void ReturnToHand()

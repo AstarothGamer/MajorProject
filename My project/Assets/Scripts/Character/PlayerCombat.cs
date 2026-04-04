@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
@@ -14,13 +15,26 @@ public class PlayerCombat : MonoBehaviour
     [Header("Shield")]
     public int shieldForCurrentTurn = 0;
 
+    [Header("Stats")] 
+    [SerializeField] private TMP_Text hp;
+    [SerializeField] private TMP_Text shield;
+    [SerializeField] private TMP_Text energy;
+
+    void Start()
+    {
+        hp.text = $"HP: {currentHp}";
+        shield.text = $"Shield: {shieldForCurrentTurn}";
+        energy.text = $"Energy: {currentEnergy}";
+    }
+    
     public void SpendEnergy(int value)
     {
         currentEnergy -= value;
         if (currentEnergy < 0)
             currentEnergy = 0;
 
-        Debug.Log($"Игрок потратил {value} энергии. Текущая энергия: {currentEnergy}/{maxEnergy}");
+        energy.text = $"Energy: {currentEnergy}";
+        Debug.Log($"Player spent {value} energy. current energy: {currentEnergy}/{maxEnergy}");
     }
 
     public void GainEnergy(int value)
@@ -29,13 +43,15 @@ public class PlayerCombat : MonoBehaviour
         if (currentEnergy > maxEnergy)
             currentEnergy = maxEnergy;
 
-        Debug.Log($"Игрок получил {value} энергии. Текущая энергия: {currentEnergy}/{maxEnergy}");
+        energy.text = $"Energy: {currentEnergy}";
+        Debug.Log($"Player got {value} energy. current energy: {currentEnergy}/{maxEnergy}");
     }
 
     public void AddShieldForOneTurn(int value)
     {
         shieldForCurrentTurn += value;
-        Debug.Log($"Игрок получил {value} щита на 1 ход. Щит: {shieldForCurrentTurn}");
+        shield.text = $"Shield: {shieldForCurrentTurn}";
+        Debug.Log($"Player got {value} shield for this turn. Shield: {shieldForCurrentTurn}");
     }
 
     public void Heal(int value)
@@ -43,8 +59,9 @@ public class PlayerCombat : MonoBehaviour
         currentHp += value;
         if (currentHp > maxHp)
             currentHp = maxHp;
-
-        Debug.Log($"Игрок восстановил {value} HP. HP: {currentHp}/{maxHp}");
+        
+        hp.text = $"HP: {currentHp}";
+        Debug.Log($"Player got {value} HP. HP: {currentHp}/{maxHp}");
     }
 
     public void TakeDamage(int value)
@@ -56,6 +73,7 @@ public class PlayerCombat : MonoBehaviour
             int absorbed = Mathf.Min(shieldForCurrentTurn, damageLeft);
             shieldForCurrentTurn -= absorbed;
             damageLeft -= absorbed;
+            shield.text = $"Shield: {shieldForCurrentTurn}";
         }
 
         if (damageLeft > 0)
@@ -63,14 +81,22 @@ public class PlayerCombat : MonoBehaviour
             currentHp -= damageLeft;
             if (currentHp < 0)
                 currentHp = 0;
+            hp.text = $"HP: {currentHp}";
         }
 
-        Debug.Log($"Игрок получил {value} урона. HP: {currentHp}/{maxHp}, Shield: {shieldForCurrentTurn}");
+        Debug.Log($"Player got {value} damage. HP: {currentHp}/{maxHp}, Shield: {shieldForCurrentTurn}");
     }
 
     public void ResetShieldAtEndTurn()
     {
         shieldForCurrentTurn = 0;
-        Debug.Log("Щит игрока сброшен в конце хода.");
+        shield.text = $"Shield: {shieldForCurrentTurn}";
+        Debug.Log("player's shield reset.");
+    }
+    
+    public void ResetEnergy()
+    {
+        currentEnergy = maxEnergy;
+        Debug.Log($"Energy reset: {currentEnergy}/{maxEnergy}");
     }
 }

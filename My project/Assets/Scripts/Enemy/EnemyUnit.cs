@@ -8,10 +8,11 @@ public class EnemyUnit : MonoBehaviour
     public string enemyName;
     public int maxHp = 30;
     public int currentHp = 30;
+    public int damage = 5;
+    
     [SerializeField] TMP_Text enemyText;
 
     [Header("Optional Multi Target Setup")]
-    // [Tooltip("")]
     public List<EnemyUnit> additionalTargets = new List<EnemyUnit>();
 
     public int TakeDamage(int damage)
@@ -29,6 +30,13 @@ public class EnemyUnit : MonoBehaviour
             Die();
 
         return realDamage;
+    }
+    
+    public void TakeTurn(PlayerCombat player)
+    {
+        Debug.Log($"Enemy [{enemyName}] deal to player {damage} damage.");
+
+        player.TakeDamage(damage);
     }
 
     private void Die()
