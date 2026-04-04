@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Card
   cardName: Block
-  description: Deal Damage
+  description: Gain Sheild
   cardType: 1
   attackTargetMode: 0
   effects:
