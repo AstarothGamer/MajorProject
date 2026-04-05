@@ -97,6 +97,7 @@ public class PlayerCombat : MonoBehaviour
     public void ResetEnergy()
     {
         currentEnergy = maxEnergy;
+        energy.text = $"Energy: {currentEnergy}";
         Debug.Log($"Energy reset: {currentEnergy}/{maxEnergy}");
     }
 }
