@@ -341,6 +341,7 @@ GameObject:
   m_Component:
   - component: {fileID: 235415180}
   - component: {fileID: 235415181}
+  - component: {fileID: 235415182}
   m_Layer: 5
   m_Name: Main Menu
   m_TagString: Untagged
@@ -381,6 +382,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5884ebffede79d459d4be2d889bcf6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenu
+--- !u!114 &235415182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 235415179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9f4b6719e5738547b50cf54fd64ca83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::QuitGame
 --- !u!1 &246420702
 GameObject:
   m_ObjectHideFlags: 0
@@ -846,7 +859,7 @@ GameObject:
   - component: {fileID: 589129068}
   - component: {fileID: 589129067}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: GameTitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -894,7 +907,7 @@ MonoBehaviour:
   m_text: Dark Innings
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1318,8 +1331,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 235415181}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+      - m_Target: {fileID: 235415182}
+        m_TargetAssemblyTypeName: QuitGame, Assembly-CSharp
         m_MethodName: quitGame
         m_Mode: 1
         m_Arguments:
