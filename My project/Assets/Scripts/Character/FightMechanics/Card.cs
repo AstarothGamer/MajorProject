@@ -36,7 +36,7 @@ public class CardEffectSettings
 
 [RequireComponent(typeof(RectTransform))]
 [RequireComponent(typeof(CanvasGroup))]
-public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [Header("Card Info")]
     public string cardName;
@@ -134,6 +134,50 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
             return;
     
         ReturnToHand();
+    }
+    
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (DescriptionPanel.Instance == null) return;
+
+        DescriptionPanel.Instance.Show(
+            cardName,
+            description,
+            GetFullDescription(),
+            eventData.position + new Vector2(200, -50)
+        );
+    }
+    
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (DescriptionPanel.Instance == null) return;
+
+        DescriptionPanel.Instance.Hide();
+    }
+    
+    private string GetFullDescription()
+    {
+        string text = "";
+
+        if (effects.damage > 0)
+            text += $"Deals {effects.damage} damage\n";
+
+        if (effects.shieldToPlayerForOneTurn > 0)
+            text += $"Gives {effects.shieldToPlayerForOneTurn} shields for 1 turn\n";
+
+        if (effects.healFromDamageMultiplier > 0)
+            text += $"Heals on {(effects.healFromDamageMultiplier * 100)}% of damage\n";
+
+        if (effects.playerLoseHp > 0)
+            text += $"Player loses {effects.playerLoseHp} HP\n";
+
+        if (effects.energyCost > 0)
+            text += $"Cost: {effects.energyCost} energy\n";
+
+        if (effects.energyGainAfterPlay > 0)
+            text += $"Gives {effects.energyGainAfterPlay} energy\n";
+
+        return text;
     }
     
     private bool TryPlayCardHybrid(EnemyUnit enemy, CardPlayZone zone)
