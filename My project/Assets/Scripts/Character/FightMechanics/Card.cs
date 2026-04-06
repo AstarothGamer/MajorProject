@@ -69,7 +69,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     private DeckManager deckManager;
     private TurnManager turnManager;
 
-    private void Awake()
+    void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();

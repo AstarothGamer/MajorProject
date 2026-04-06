@@ -19,6 +19,13 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private TMP_Text hp;
     [SerializeField] private TMP_Text shield;
     [SerializeField] private TMP_Text energy;
+    
+    [SerializeField] GameOver gameOver;
+
+    void Awake()
+    {
+        gameOver = FindFirstObjectByType<GameOver>();
+    }
 
     void Start()
     {
@@ -79,8 +86,11 @@ public class PlayerCombat : MonoBehaviour
         if (damageLeft > 0)
         {
             currentHp -= damageLeft;
-            if (currentHp < 0)
+            if (currentHp <= 0)
+            {
                 currentHp = 0;
+                gameOver.Show();
+            }
             hp.text = $"HP: {currentHp}";
         }
 
