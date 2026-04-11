@@ -108,9 +108,9 @@ MonoBehaviour:
   effects:
     energyCost: 1
     energyGainAfterPlay: 0
-    damage: 7
-    shieldToPlayerForOneTurn: 0
-    playerLoseHp: 0
+    damageValues: 03000000040000000500000006000000
+    shieldValues: 
+    playerLoseHpValues: 
     healFromDamageMultiplier: 0
   rootCanvas: {fileID: 0}
   dragScale: 1.1

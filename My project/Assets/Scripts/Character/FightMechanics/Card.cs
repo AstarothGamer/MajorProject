@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -24,10 +25,10 @@ public class CardEffectSettings
     public int energyCost = 1;
     public int energyGainAfterPlay = 0;
 
-    [Header("Effects")]
-    public int damage = 0;
-    public int shieldToPlayerForOneTurn = 0;
-    public int playerLoseHp = 0;
+    [Header("Wheel Effects")]
+    public List<int> damageValues = new List<int>();
+    public List<int> shieldValues = new List<int>();
+    public List<int> playerLoseHpValues = new List<int>();
 
     [Tooltip("0.0 = not healing, 1.0 = heal 100% on dealing damage")]
     [Range(0f, 3f)]
@@ -68,6 +69,10 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     private PlayerCombat playerCombat;
     private DeckManager deckManager;
     private TurnManager turnManager;
+    private WheelOfFortune wheel;
+    
+    private int lastWheelIndex = 0;
+    private bool wheelFinished = false;
 
     void Awake()
     {
@@ -82,6 +87,29 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         currentHandZone = GetComponentInParent<CardHandZone>();
         deckManager = FindFirstObjectByType<DeckManager>();
         turnManager = FindFirstObjectByType<TurnManager>();
+        wheel = FindFirstObjectByType<WheelOfFortune>();
+    }
+
+    void Start()
+    {
+        if (wheel != null)
+        {
+            wheel.OnSpinFinished.AddListener(OnWheelFinished);
+        }
+    }
+    
+    private void OnWheelFinished(int index)
+    {
+        lastWheelIndex = index;
+        wheelFinished = true;
+    }
+    
+    private void OnDestroy()
+    {
+        if (wheel != null)
+        {
+            wheel.OnSpinFinished.RemoveListener(OnWheelFinished);
+        }
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -159,23 +187,23 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     {
         string text = "";
 
-        if (effects.damage > 0)
-            text += $"Deals {effects.damage} damage\n";
+        if (effects.damageValues != null && effects.damageValues.Count > 0)
+            text += $"Damage: {string.Join(", ", effects.damageValues)}\n";
 
-        if (effects.shieldToPlayerForOneTurn > 0)
-            text += $"Gives {effects.shieldToPlayerForOneTurn} shields for 1 turn\n";
+        if (effects.shieldValues != null && effects.shieldValues.Count > 0)
+            text += $"Shield: {string.Join(", ", effects.shieldValues)}\n";
+
+        if (effects.playerLoseHpValues != null && effects.playerLoseHpValues.Count > 0)
+            text += $"Player loses HP: {string.Join(", ", effects.playerLoseHpValues)}\n";
 
         if (effects.healFromDamageMultiplier > 0)
-            text += $"Heals on {(effects.healFromDamageMultiplier * 100)}% of damage\n";
-
-        if (effects.playerLoseHp > 0)
-            text += $"Player loses {effects.playerLoseHp} HP\n";
+            text += $"Heals for {(effects.healFromDamageMultiplier * 100f):0}% of dealt damage\n";
 
         if (effects.energyCost > 0)
             text += $"Cost: {effects.energyCost} energy\n";
 
         if (effects.energyGainAfterPlay > 0)
-            text += $"Gives {effects.energyGainAfterPlay} energy\n";
+            text += $"Gain after play: {effects.energyGainAfterPlay} energy\n";
 
         return text;
     }
@@ -263,7 +291,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
                 if (enemy == null)
                     return false;
 
-                PlayOnEnemies(new List<EnemyUnit> { enemy });
+                StartCoroutine(PlayCardWithWheel(new List<EnemyUnit> { enemy }));
                 return true;
 
             case AttackTargetMode.SeveralEnemiesFromSelected:
@@ -282,7 +310,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
                     }
                 }
 
-                PlayOnEnemies(severalTargets);
+                StartCoroutine(PlayCardWithWheel(severalTargets));
                 return true;
 
             case AttackTargetMode.AllEnemies:
@@ -290,7 +318,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
                     return false;
 
                 EnemyUnit[] allEnemies = FindObjectsByType<EnemyUnit>(FindObjectsSortMode.None);
-                PlayOnEnemies(new List<EnemyUnit>(allEnemies));
+                StartCoroutine(PlayCardWithWheel(new List<EnemyUnit>(allEnemies)));
                 return true;
 
             default:
@@ -303,35 +331,52 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         if (zone == null)
             return false;
 
-        PlayWithoutEnemyTarget();
+        StartCoroutine(PlayCardWithWheel(null));
         return true;
     }
-
-    private bool HasEnoughEnergy()
+    
+    private IEnumerator PlayCardWithWheel(List<EnemyUnit> enemies)
     {
-        return playerCombat.CurrentEnergy >= effects.energyCost;
-    }
-
-    private void PlayOnEnemies(List<EnemyUnit> enemies)
-    {
-        int totalDamageDealt = 0;
+        if (wheel == null)
+        {
+            Debug.LogWarning($"Card [{cardName}] cannot be played: WheelOfFortune not found.");
+            yield break;
+        }
 
         playerCombat.SpendEnergy(effects.energyCost);
 
-        if (effects.shieldToPlayerForOneTurn > 0)
-            playerCombat.AddShieldForOneTurn(effects.shieldToPlayerForOneTurn);
+        wheelFinished = false;
 
-        if (effects.playerLoseHp > 0)
-            playerCombat.TakeDamage(effects.playerLoseHp);
+        wheel.Spin();
 
-        if (effects.damage > 0)
+        while (!wheelFinished)
+            yield return null;
+
+        ApplyEffectsByIndex(lastWheelIndex, enemies);
+    }
+    
+    private void ApplyEffectsByIndex(int wheelIndex, List<EnemyUnit> enemies)
+    {
+        int damage = GetValueFromWheelIndex(effects.damageValues, wheelIndex);
+        int shield = GetValueFromWheelIndex(effects.shieldValues, wheelIndex);
+        int loseHp = GetValueFromWheelIndex(effects.playerLoseHpValues, wheelIndex);
+
+        int totalDamageDealt = 0;
+
+        if (shield > 0)
+            playerCombat.AddShieldForOneTurn(shield);
+
+        if (loseHp > 0)
+            playerCombat.TakeDamage(loseHp);
+
+        if (damage > 0 && enemies != null)
         {
             foreach (EnemyUnit enemy in enemies)
             {
                 if (enemy == null)
                     continue;
 
-                int dealt = enemy.TakeDamage(effects.damage);
+                int dealt = enemy.TakeDamage(damage);
                 totalDamageDealt += dealt;
             }
         }
@@ -348,21 +393,19 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
         FinishPlay();
     }
-
-    private void PlayWithoutEnemyTarget()
+    
+    private int GetValueFromWheelIndex(List<int> values, int wheelIndex)
     {
-        playerCombat.SpendEnergy(effects.energyCost);
+        if (values == null || values.Count == 0)
+            return 0;
 
-        if (effects.shieldToPlayerForOneTurn > 0)
-            playerCombat.AddShieldForOneTurn(effects.shieldToPlayerForOneTurn);
+        int mappedIndex = wheelIndex % values.Count;
+        return values[mappedIndex];
+    }
 
-        if (effects.playerLoseHp > 0)
-            playerCombat.TakeDamage(effects.playerLoseHp);
-
-        if (effects.energyGainAfterPlay > 0)
-            playerCombat.GainEnergy(effects.energyGainAfterPlay);
-
-        FinishPlay();
+    private bool HasEnoughEnergy()
+    {
+        return playerCombat.CurrentEnergy >= effects.energyCost;
     }
     
     private void FinishPlay()
