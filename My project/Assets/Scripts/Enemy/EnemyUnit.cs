@@ -6,25 +6,62 @@ public class EnemyUnit : MonoBehaviour
 {
     [Header("Enemy Stats")]
     public string enemyName;
-    public int maxHp = 30;
-    public int currentHp = 30;
-    public int damage = 5;
-    
+    public int minHp;
+    public int maxHp;
+    public int currentHp;
+    public int minDamage;
+    public int maxDamage;
+    public int currentDamage;
+    public int minShield;
+    public int maxShield;
+    public int currentShield;
+    public int shieldForCurrentTurn;
+
+    [Header("Texts")] 
+    [SerializeField] TMP_Text enemyTakeDamageText;
     [SerializeField] TMP_Text enemyText;
+    [SerializeField] TMP_Text nextTurnText;
 
     [Header("Optional Multi Target Setup")]
-    public List<EnemyUnit> additionalTargets = new List<EnemyUnit>();
+    // public List<EnemyUnit> additionalTargets = new List<EnemyUnit>();
+
+    private bool attacked = false;
+
+    void Awake()
+    {
+        currentHp = Random.Range(minHp, maxHp + 1);
+        enemyText.text = $"HP {currentHp} \n Shield {currentShield}";
+    }
+
+    void Start()
+    {
+        NextTurn();
+    }
 
     public int TakeDamage(int damage)
     {
+        int damageLeft = damage;
+
+        if (shieldForCurrentTurn > 0)
+        {
+            int absorbed = Mathf.Min(shieldForCurrentTurn, damageLeft);
+            shieldForCurrentTurn -= absorbed;
+            damageLeft -= absorbed;
+        }
+        
         int before = currentHp;
-        currentHp -= damage;
-        if (currentHp < 0)
-            currentHp = 0;
+        
+        if (damageLeft > 0)
+        {
+            currentHp -= damageLeft;
+            if(currentHp < 0)
+                currentHp = 0;
+        }
 
         int realDamage = before - currentHp;
 
-        enemyText.text = $"[{enemyName}] got {realDamage} damage. HP: {currentHp}/{maxHp}";
+        enemyText.text = $"HP {currentHp} \n Shield {currentShield}";
+        enemyTakeDamageText.text = $"[{enemyName}] got {realDamage} damage.";
 
         if (currentHp <= 0)
             Die();
@@ -34,9 +71,41 @@ public class EnemyUnit : MonoBehaviour
     
     public void TakeTurn(PlayerCombat player)
     {
-        Debug.Log($"Enemy [{enemyName}] deal to player {damage} damage.");
+        Debug.Log($"Enemy [{enemyName}] deal to player {currentDamage} damage.");
 
-        player.TakeDamage(damage);
+        if (attacked)
+        {
+            Debug.Log($"Enemy [{enemyName}] attacks for {currentDamage}");
+            player.TakeDamage(currentDamage);
+        }
+        else
+        {
+            Debug.Log($"Enemy [{enemyName}] gains {currentShield} shield");
+            TakeShield(currentShield);
+        }
+    }
+
+    public void TakeShield(int amount)
+    {
+        shieldForCurrentTurn += amount;
+    }
+
+    public void NextTurn()
+    {
+        shieldForCurrentTurn = 0;
+        
+        if (!attacked)
+        {
+            currentDamage = Random.Range(minDamage, maxDamage + 1);
+            attacked = true;
+            nextTurnText.text = "Next action: Attack";
+        }
+        else
+        {
+            currentShield = Random.Range(minShield, maxShield + 1);
+            attacked = false;
+            nextTurnText.text = "Next action: Shield";
+        }
     }
 
     private void Die()

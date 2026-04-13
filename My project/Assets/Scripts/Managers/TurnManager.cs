@@ -51,6 +51,14 @@ public class TurnManager : MonoBehaviour
             }
         }
 
+        foreach (EnemyUnit enemy in enemies)
+        {
+            if (enemy != null)
+            {
+                enemy.NextTurn();
+            }
+        }
+
         playerCombat.ResetShieldAtEndTurn();
 
         yield return new WaitForSeconds(0.5f);

@@ -255,34 +255,6 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         return true;
     }
 
-    private bool TryPlayCard(GameObject dropObject)
-    {
-        if (dropObject == null)
-            return false;
-
-        if (!HasEnoughEnergy())
-        {
-            Debug.Log($"Not enough energy: {cardName}");
-            return false;
-        }
-
-        EnemyUnit enemy = dropObject.GetComponentInParent<EnemyUnit>();
-        CardPlayZone zone = dropObject.GetComponentInParent<CardPlayZone>();
-
-        switch (cardType)
-        {
-            case CardType.Attack:
-                return TryPlayAttack(enemy, zone);
-
-            case CardType.Skill:
-            case CardType.Passive:
-                return TryPlaySkillOrPassive(zone);
-
-            default:
-                return false;
-        }
-    }
-
     private bool TryPlayAttack(EnemyUnit enemy, CardPlayZone zone)
     {
         switch (attackTargetMode)
@@ -300,16 +272,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
                 List<EnemyUnit> severalTargets = new List<EnemyUnit>();
                 severalTargets.Add(enemy);
-
-                if (enemy.additionalTargets != null)
-                {
-                    foreach (EnemyUnit extraTarget in enemy.additionalTargets)
-                    {
-                        if (extraTarget != null && !severalTargets.Contains(extraTarget))
-                            severalTargets.Add(extraTarget);
-                    }
-                }
-
+                
                 StartCoroutine(PlayCardWithWheel(severalTargets));
                 return true;
 
