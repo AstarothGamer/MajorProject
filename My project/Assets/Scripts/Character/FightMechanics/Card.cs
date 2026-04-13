@@ -362,8 +362,13 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         if (values == null || values.Count == 0)
             return 0;
 
-        int mappedIndex = wheelIndex % values.Count;
-        return values[mappedIndex];
+        if (wheelIndex < 0)
+            wheelIndex = 0;
+
+        if (wheelIndex >= values.Count)
+            wheelIndex = values.Count - 1;
+
+        return values[wheelIndex];
     }
 
     private bool HasEnoughEnergy()
@@ -389,6 +394,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
             Destroy(gameObject);
         }
     }
+    
 
     private void ReturnToHand()
     {

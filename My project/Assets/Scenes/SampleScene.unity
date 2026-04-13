@@ -872,6 +872,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WheelOfFortune
   wheelRoot: {fileID: 595130677}
+  labelPrefab: {fileID: 4841742852302042021, guid: f99529fcaddad2d42b4251108e8c4455, type: 3}
+  wheel: {fileID: 595130676}
+  labelRadius: 30
+  secondsTillHideWheel: 2
   minFullTurns: 4
   maxFullTurns: 8
   spinDurationMin: 2.8
@@ -915,6 +919,13 @@ MonoBehaviour:
   - 1
   - 1
   segmentCount: 10
+  segmentValueIndices: 00000000000000000000000000000000010000000100000001000000020000000200000003000000
+  valueTexts:
+  - 1
+  - 2
+  - 3
+  - 4
+  shuffleOnStart: 1
 --- !u!4 &391499907
 Transform:
   m_ObjectHideFlags: 0
@@ -1864,7 +1875,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &595130677
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1874,8 +1885,8 @@ RectTransform:
   m_GameObject: {fileID: 595130676}
   m_LocalRotation: {x: 0, y: 0, z: 0.1564345, w: 0.98768836}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 821788053}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 18}
