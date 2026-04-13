@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -30,7 +29,7 @@ public class EnemyUnit : MonoBehaviour
     void Awake()
     {
         currentHp = Random.Range(minHp, maxHp + 1);
-        enemyText.text = $"HP {currentHp} \n Shield {currentShield}";
+        enemyText.text = $"HP {currentHp} \n Shield {shieldForCurrentTurn}";
     }
 
     void Start()
@@ -60,7 +59,7 @@ public class EnemyUnit : MonoBehaviour
 
         int realDamage = before - currentHp;
 
-        enemyText.text = $"HP {currentHp} \n Shield {currentShield}";
+        enemyText.text = $"HP {currentHp} \n Shield {shieldForCurrentTurn}";
         enemyTakeDamageText.text = $"[{enemyName}] got {realDamage} damage.";
 
         if (currentHp <= 0)
@@ -71,6 +70,7 @@ public class EnemyUnit : MonoBehaviour
     
     public void TakeTurn(PlayerCombat player)
     {
+        shieldForCurrentTurn = 0;
         Debug.Log($"Enemy [{enemyName}] deal to player {currentDamage} damage.");
 
         if (attacked)
@@ -83,6 +83,8 @@ public class EnemyUnit : MonoBehaviour
             Debug.Log($"Enemy [{enemyName}] gains {currentShield} shield");
             TakeShield(currentShield);
         }
+        
+        enemyText.text = $"HP {currentHp} \n Shield {shieldForCurrentTurn}";
     }
 
     public void TakeShield(int amount)
@@ -92,8 +94,6 @@ public class EnemyUnit : MonoBehaviour
 
     public void NextTurn()
     {
-        shieldForCurrentTurn = 0;
-        
         if (!attacked)
         {
             currentDamage = Random.Range(minDamage, maxDamage + 1);
