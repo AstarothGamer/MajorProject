@@ -98,7 +98,7 @@ public class EnemyUnit : MonoBehaviour
         {
             currentDamage = Random.Range(minDamage, maxDamage + 1);
             attacked = true;
-            nextTurnText.text = "Next action: Attack";
+            nextTurnText.text = $"Next action: Attack {currentDamage}";
         }
         else
         {
