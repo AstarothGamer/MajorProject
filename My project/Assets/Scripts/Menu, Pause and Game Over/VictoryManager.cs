@@ -29,6 +29,11 @@ public class VictoryManager : MonoBehaviour
     private void ShowVictory()
     {
         Debug.Log("VICTORY!");
+        
+        if (LevelManager.Instance != null)
+        {
+            LevelManager.Instance.CompleteCurrentLevel();
+        }
 
         if (victoryPanel != null)
             victoryPanel.SetActive(true);
@@ -53,6 +58,6 @@ public class VictoryManager : MonoBehaviour
 
     public void GoToMap()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 }

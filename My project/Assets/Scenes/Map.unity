@@ -908,6 +908,7 @@ GameObject:
   - component: {fileID: 435895158}
   - component: {fileID: 435895157}
   - component: {fileID: 435895156}
+  - component: {fileID: 435895159}
   m_Layer: 5
   m_Name: Floor 2 Treasure Room
   m_TagString: Untagged
@@ -977,7 +978,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 435895157}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 435895159}
+        m_TargetAssemblyTypeName: LevelButton, Assembly-CSharp
+        m_MethodName: LoadLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &435895157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1016,6 +1029,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 435895154}
   m_CullTransparentMesh: 1
+--- !u!114 &435895159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 435895154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af62718c8e0eb4945ba92db52cd19154, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelButton
+  levelIndex: 1
+  button: {fileID: 435895156}
 --- !u!1 &583511709
 GameObject:
   m_ObjectHideFlags: 0
@@ -1253,6 +1280,7 @@ GameObject:
   - component: {fileID: 750167482}
   - component: {fileID: 750167481}
   - component: {fileID: 750167480}
+  - component: {fileID: 750167483}
   m_Layer: 5
   m_Name: Floor 1 (Enemy)
   m_TagString: Untagged
@@ -1322,7 +1350,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 750167481}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 750167483}
+        m_TargetAssemblyTypeName: LevelButton, Assembly-CSharp
+        m_MethodName: LoadLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &750167481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1361,6 +1401,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 750167478}
   m_CullTransparentMesh: 1
+--- !u!114 &750167483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 750167478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af62718c8e0eb4945ba92db52cd19154, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelButton
+  levelIndex: 0
+  button: {fileID: 750167480}
 --- !u!1 &776829959
 GameObject:
   m_ObjectHideFlags: 0
@@ -1708,6 +1762,7 @@ GameObject:
   - component: {fileID: 904315006}
   - component: {fileID: 904315005}
   - component: {fileID: 904315004}
+  - component: {fileID: 904315007}
   m_Layer: 5
   m_Name: Floor 3 (Enemy)
   m_TagString: Untagged
@@ -1777,7 +1832,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 904315005}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 904315007}
+        m_TargetAssemblyTypeName: LevelButton, Assembly-CSharp
+        m_MethodName: LoadLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &904315005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1816,6 +1883,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 904315002}
   m_CullTransparentMesh: 1
+--- !u!114 &904315007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 904315002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af62718c8e0eb4945ba92db52cd19154, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelButton
+  levelIndex: 2
+  button: {fileID: 904315004}
 --- !u!1 &921233621
 GameObject:
   m_ObjectHideFlags: 0
@@ -3437,6 +3518,7 @@ GameObject:
   - component: {fileID: 1983682775}
   - component: {fileID: 1983682774}
   - component: {fileID: 1983682773}
+  - component: {fileID: 1983682776}
   m_Layer: 5
   m_Name: Floor 4 (Door)
   m_TagString: Untagged
@@ -3506,7 +3588,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1983682774}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1983682776}
+        m_TargetAssemblyTypeName: LevelButton, Assembly-CSharp
+        m_MethodName: LoadLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1983682774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3545,6 +3639,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1983682771}
   m_CullTransparentMesh: 1
+--- !u!114 &1983682776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1983682771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af62718c8e0eb4945ba92db52cd19154, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelButton
+  levelIndex: 3
+  button: {fileID: 1983682773}
 --- !u!1 &2002538512
 GameObject:
   m_ObjectHideFlags: 0
