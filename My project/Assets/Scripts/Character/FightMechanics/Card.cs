@@ -116,6 +116,8 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     {
         if (!CanStartDrag())
             return;
+        if (turnManager != null && turnManager.IsActionInProgress)
+            return;
 
         isDragging = true;
 
@@ -144,6 +146,11 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     {
         if (!isDragging)
             return;
+        if (turnManager != null && turnManager.IsActionInProgress)
+        {
+            ReturnToHand();
+            return;
+        }
     
         isDragging = false;
         canvasGroup.blocksRaycasts = true;
@@ -300,6 +307,9 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     
     private IEnumerator PlayCardWithWheel(List<EnemyUnit> enemies)
     {
+        if (turnManager != null)
+            turnManager.StartAction();
+        
         if (wheel == null)
         {
             Debug.LogWarning($"Card [{cardName}] cannot be played: WheelOfFortune not found.");

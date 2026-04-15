@@ -5,6 +5,7 @@ public class TurnManager : MonoBehaviour
 {
     public DeckManager deckManager;
     public PlayerCombat playerCombat;
+    public bool IsActionInProgress { get; private set; }
 
     private bool isPlayerTurn = true;
 
@@ -12,11 +13,23 @@ public class TurnManager : MonoBehaviour
     {
         StartPlayerTurn();
     }
+    
+    public void StartAction()
+    {
+        IsActionInProgress = true;
+    }
+
+    public void EndAction()
+    {
+        IsActionInProgress = false;
+    }
 
     public void EndPlayerTurn()
     {
         if (!isPlayerTurn) return;
 
+        if (IsActionInProgress) return;
+        
         StartCoroutine(EnemyTurnRoutine());
     }
 

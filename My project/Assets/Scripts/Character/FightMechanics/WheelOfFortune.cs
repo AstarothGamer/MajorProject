@@ -12,6 +12,7 @@ public class WheelOfFortune : MonoBehaviour
     [SerializeField] private RectTransform wheelRoot;   
     [SerializeField] private TMP_Text labelPrefab;
     [SerializeField] private GameObject wheel;
+    private TurnManager turnManager;
     
     [Header("Labels")]
     [SerializeField] private float labelRadius = 140f;
@@ -55,7 +56,8 @@ public class WheelOfFortune : MonoBehaviour
 
         if (shuffleOnStart)
             ShuffleSegments();
-
+        
+        turnManager = FindFirstObjectByType<TurnManager>();
         RebuildLabels();
     }
 
@@ -66,6 +68,9 @@ public class WheelOfFortune : MonoBehaviour
 
     private void HideWheel()
     {
+        if (turnManager != null)
+            turnManager.EndAction();
+        
         wheel.SetActive(false);
     }
     
