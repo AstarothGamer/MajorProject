@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -111,6 +112,12 @@ public class EnemyUnit : MonoBehaviour
     private void Die()
     {
         Debug.Log($"Enemy [{enemyName}] died.");
+
+        if (VictoryManager.Instance != null)
+        {
+            VictoryManager.Instance.CheckVictoryDelayed();
+        }
+
         Destroy(gameObject);
     }
 }
