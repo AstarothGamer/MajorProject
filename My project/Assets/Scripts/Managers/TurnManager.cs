@@ -46,8 +46,7 @@ public class TurnManager : MonoBehaviour
         {
             if (enemy != null)
             {
-                enemy.TakeTurn(playerCombat);
-                yield return new WaitForSeconds(0.5f);
+                yield return StartCoroutine(enemy.TakeTurnRoutine(playerCombat));
             }
         }
 

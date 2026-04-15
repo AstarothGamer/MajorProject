@@ -22,8 +22,11 @@ public class EnemyUnit : MonoBehaviour
     [SerializeField] TMP_Text enemyText;
     [SerializeField] TMP_Text nextTurnText;
 
-    [Header("Optional Multi Target Setup")]
+    // [Header("Optional Multi Target Setup")]
     // public List<EnemyUnit> additionalTargets = new List<EnemyUnit>();
+    
+    [Header("Animation")]
+    [SerializeField] private Animator animator;
 
     private bool attacked = false;
 
@@ -69,14 +72,19 @@ public class EnemyUnit : MonoBehaviour
         return realDamage;
     }
     
-    public void TakeTurn(PlayerCombat player)
+    public IEnumerator TakeTurnRoutine(PlayerCombat player)
     {
         shieldForCurrentTurn = 0;
-        Debug.Log($"Enemy [{enemyName}] deal to player {currentDamage} damage.");
 
         if (attacked)
         {
             Debug.Log($"Enemy [{enemyName}] attacks for {currentDamage}");
+
+            if (animator != null)
+                animator.SetTrigger("Attack");
+
+            yield return new WaitForSeconds(2f);
+
             player.TakeDamage(currentDamage);
         }
         else
@@ -84,7 +92,7 @@ public class EnemyUnit : MonoBehaviour
             Debug.Log($"Enemy [{enemyName}] gains {currentShield} shield");
             TakeShield(currentShield);
         }
-        
+
         enemyText.text = $"HP {currentHp} \n Shield {shieldForCurrentTurn}";
     }
 
