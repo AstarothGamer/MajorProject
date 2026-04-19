@@ -4,17 +4,18 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance;
 
-    private const string LevelKey = "CurrentLevel";
-
-    public int CurrentLevel { get; private set; }
+    public int CurrentLevel { get; private set; } = 0;
 
     private void Awake()
     {
+        ResetProgress();
+        
         if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            LoadProgress();
+
+            Initialize();
         }
         else
         {
@@ -22,9 +23,9 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    private void LoadProgress()
+    private void Initialize()
     {
-        CurrentLevel = PlayerPrefs.GetInt(LevelKey, 0);
+        CurrentLevel = 0;
     }
 
     public bool IsLevelUnlocked(int levelIndex)
@@ -35,14 +36,12 @@ public class LevelManager : MonoBehaviour
     public void CompleteCurrentLevel()
     {
         CurrentLevel++;
-        PlayerPrefs.SetInt(LevelKey, CurrentLevel);
-        PlayerPrefs.Save();
+        Debug.Log($"Level completed. CurrentLevel = {CurrentLevel}");
     }
 
     public void ResetProgress()
     {
         CurrentLevel = 0;
-        PlayerPrefs.SetInt(LevelKey, CurrentLevel);
-        PlayerPrefs.Save();
+        Debug.Log("Progress reset");
     }
 }

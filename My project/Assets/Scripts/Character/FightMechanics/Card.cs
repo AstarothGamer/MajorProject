@@ -37,7 +37,7 @@ public class CardEffectSettings
 
 [RequireComponent(typeof(RectTransform))]
 [RequireComponent(typeof(CanvasGroup))]
-public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
+public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     [Header("Card Info")]
     public string cardName;
@@ -53,7 +53,13 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     [Header("Drag Settings")]
     [SerializeField] private Canvas rootCanvas;
     [SerializeField] private float dragScale = 1.1f;
-
+    
+    [Header("Reward Mode")]
+    public bool isRewardCard = false;
+    public System.Action<Card> OnRewardSelected;
+    [SerializeField] private GameObject selectionFrame;
+    private Card originalPrefab;
+    
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
 
@@ -97,6 +103,22 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
             wheel.OnSpinFinished.AddListener(OnWheelFinished);
         }
     }
+    public void SetOriginalPrefab(Card prefab)
+    {
+        originalPrefab = prefab;
+    }
+
+    public Card GetOriginalPrefab()
+    {
+        return originalPrefab != null ? originalPrefab : this;
+    }
+    
+    public void SetSelected(bool value)
+    {
+        if (selectionFrame != null)
+            selectionFrame.SetActive(value);
+    }
+    
     
     private void OnWheelFinished(int index)
     {
@@ -111,9 +133,17 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
             wheel.OnSpinFinished.RemoveListener(OnWheelFinished);
         }
     }
+    
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (!isRewardCard) return;
+
+        OnRewardSelected?.Invoke(this);
+    }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (isRewardCard) return;
         if (!CanStartDrag())
             return;
         if (turnManager != null && turnManager.IsActionInProgress)
@@ -136,6 +166,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (isRewardCard) return;
         if (!isDragging)
             return;
 
@@ -144,6 +175,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (isRewardCard) return;
         if (!isDragging)
             return;
         if (turnManager != null && turnManager.IsActionInProgress)

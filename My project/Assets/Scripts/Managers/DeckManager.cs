@@ -20,7 +20,7 @@ public class DeckManager : MonoBehaviour
 
     private void Start()
     {
-        InitializeDeck();
+        InitializeFromRuntimeDeck();
         DrawCards(cardsPerTurn);
     }
 
@@ -117,5 +117,21 @@ public class DeckManager : MonoBehaviour
             int randomIndex = Random.Range(i, list.Count);
             (list[i], list[randomIndex]) = (list[randomIndex], list[i]);
         }
+    }
+    
+    public void InitializeFromRuntimeDeck()
+    {
+        drawPile.Clear();
+        discardPile.Clear();
+        hand.Clear();
+
+        foreach (Card prefab in DeckRuntimeManager.Instance.CurrentDeck)
+        {
+            Card newCard = Instantiate(prefab, transform);
+            newCard.gameObject.SetActive(false);
+            drawPile.Add(newCard);
+        }
+
+        Shuffle(drawPile);
     }
 }

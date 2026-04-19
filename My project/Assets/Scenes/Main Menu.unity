@@ -668,6 +668,61 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!1 &292441829
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 292441831}
+  - component: {fileID: 292441830}
+  m_Layer: 0
+  m_Name: DeckRuntimeManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &292441830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 292441829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19a96e69df47e04282cad9d4bb32226, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DeckRuntimeManager
+  starterDeck:
+  - {fileID: 5508621081663610624, guid: 46199c1aa41053d42b5f2efcfef7bb47, type: 3}
+  - {fileID: 5508621081663610624, guid: 46199c1aa41053d42b5f2efcfef7bb47, type: 3}
+  - {fileID: 5508621081663610624, guid: 46199c1aa41053d42b5f2efcfef7bb47, type: 3}
+  - {fileID: 5508621081663610624, guid: 46199c1aa41053d42b5f2efcfef7bb47, type: 3}
+  - {fileID: 5508621081663610624, guid: 46199c1aa41053d42b5f2efcfef7bb47, type: 3}
+  - {fileID: 5508621081663610624, guid: ecf476b498764cc4582f805bc6451e28, type: 3}
+  - {fileID: 6606283791296407199, guid: 5c51fd90fbb0031418d75362c02ef528, type: 3}
+  - {fileID: 6606283791296407199, guid: 5c51fd90fbb0031418d75362c02ef528, type: 3}
+  - {fileID: 6606283791296407199, guid: 5c51fd90fbb0031418d75362c02ef528, type: 3}
+  - {fileID: 6606283791296407199, guid: 5c51fd90fbb0031418d75362c02ef528, type: 3}
+--- !u!4 &292441831
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 292441829}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8.65872, y: -0, z: 2.44994}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &353721755
 GameObject:
   m_ObjectHideFlags: 0
@@ -1434,3 +1489,4 @@ SceneRoots:
   - {fileID: 353721759}
   - {fileID: 83197095}
   - {fileID: 1122181698}
+  - {fileID: 292441831}
