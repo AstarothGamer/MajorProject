@@ -3301,8 +3301,8 @@ MonoBehaviour:
   secondsTillHideWheel: 2
   minFullTurns: 4
   maxFullTurns: 8
-  spinDurationMin: 2.8
-  spinDurationMax: 4.5
+  spinDurationMin: 1.5
+  spinDurationMax: 2.5
   ease:
     serializedVersion: 2
     m_Curve:
@@ -3335,12 +3335,12 @@ MonoBehaviour:
   - 1
   - 1
   - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
+  - 2
+  - 2
+  - 2
+  - 3
+  - 3
+  - 4
   segmentCount: 10
   segmentValueIndices: 00000000000000000000000000000000010000000100000001000000020000000200000003000000
   valueTexts:
@@ -13240,13 +13240,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyUnit
   enemyName: 2
-  minHp: 5
-  maxHp: 10
+  minHp: 15
+  maxHp: 20
   currentHp: 0
   minDamage: 4
   maxDamage: 8
   currentDamage: 0
-  minShield: 3
+  minShield: 5
   maxShield: 5
   currentShield: 0
   shieldForCurrentTurn: 0
@@ -13859,13 +13859,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyUnit
   enemyName: 1
-  minHp: 6
-  maxHp: 10
+  minHp: 15
+  maxHp: 20
   currentHp: 0
   minDamage: 4
   maxDamage: 8
   currentDamage: 0
-  minShield: 3
+  minShield: 5
   maxShield: 5
   currentShield: 0
   shieldForCurrentTurn: 0
