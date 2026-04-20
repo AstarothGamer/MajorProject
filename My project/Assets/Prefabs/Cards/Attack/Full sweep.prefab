@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 544a9a2e11840ab4295b0e35accbb029, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Card
-  cardName: Full sweep
+  cardName: 'Name: Full sweep'
   description: Damage all enemies
   cardType: 0
   attackTargetMode: 3
@@ -114,3 +114,5 @@ MonoBehaviour:
     healFromDamageMultiplier: 0
   rootCanvas: {fileID: 0}
   dragScale: 1.1
+  isRewardCard: 0
+  selectionFrame: {fileID: 0}

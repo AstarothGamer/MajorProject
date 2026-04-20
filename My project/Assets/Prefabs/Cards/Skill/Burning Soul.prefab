@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 544a9a2e11840ab4295b0e35accbb029, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Card
-  cardName: Burning Soul
+  cardName: 'Name: Burning Soul'
   description: 'Lose Health
 
     Gain energy'
