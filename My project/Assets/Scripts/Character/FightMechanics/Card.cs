@@ -230,10 +230,10 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         string text = "";
 
         if (effects.damageValues != null && effects.damageValues.Count > 0)
-            text += $"Damage: {string.Join(", ", effects.damageValues)}\n";
+            text += $"Wheel:   1| 2| 3| 4\nDamage: {string.Join("| ", effects.damageValues)}\n";
 
         if (effects.shieldValues != null && effects.shieldValues.Count > 0)
-            text += $"Shield: {string.Join(", ", effects.shieldValues)}\n";
+            text += $"Wheel:   1| 2| 3| 4\nShield: {string.Join(", ", effects.shieldValues)}\n";
 
         if (effects.playerLoseHpValues != null && effects.playerLoseHpValues.Count > 0)
             text += $"Player loses HP: {string.Join(", ", effects.playerLoseHpValues)}\n";
