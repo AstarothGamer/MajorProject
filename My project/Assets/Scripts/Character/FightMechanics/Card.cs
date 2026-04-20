@@ -98,6 +98,9 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
     void Start()
     {
+        if (rootCanvas == null)
+            rootCanvas = GetComponentInParent<Canvas>();
+        
         if (wheel != null)
         {
             wheel.OnSpinFinished.AddListener(OnWheelFinished);
