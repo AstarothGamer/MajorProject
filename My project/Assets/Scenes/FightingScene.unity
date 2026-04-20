@@ -13247,7 +13247,7 @@ MonoBehaviour:
   maxDamage: 8
   currentDamage: 0
   minShield: 5
-  maxShield: 5
+  maxShield: 7
   currentShield: 0
   shieldForCurrentTurn: 0
   enemyTakeDamageText: {fileID: 1756950012}
@@ -13866,7 +13866,7 @@ MonoBehaviour:
   maxDamage: 8
   currentDamage: 0
   minShield: 5
-  maxShield: 5
+  maxShield: 7
   currentShield: 0
   shieldForCurrentTurn: 0
   enemyTakeDamageText: {fileID: 510428935}

@@ -10762,12 +10762,12 @@ MonoBehaviour:
   - 1
   - 1
   - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
+  - 2
+  - 2
+  - 2
+  - 3
+  - 3
+  - 4
   segmentCount: 10
   segmentValueIndices: 00000000000000000000000000000000010000000100000001000000020000000200000003000000
   valueTexts:
@@ -10852,14 +10852,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyUnit
   enemyName: 1
-  minHp: 5
-  maxHp: 10
+  minHp: 35
+  maxHp: 40
   currentHp: 0
-  minDamage: 5
-  maxDamage: 10
+  minDamage: 10
+  maxDamage: 15
   currentDamage: 0
-  minShield: 0
-  maxShield: 0
+  minShield: 7
+  maxShield: 10
   currentShield: 0
   shieldForCurrentTurn: 0
   enemyTakeDamageText: {fileID: 1104230251}
@@ -19183,7 +19183,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2070404965}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
         m_MethodName: MainMenu
         m_Mode: 1
@@ -19668,7 +19668,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2070404965}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
         m_MethodName: ResumeGame
         m_Mode: 1
