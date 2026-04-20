@@ -110,9 +110,11 @@ MonoBehaviour:
   effects:
     energyCost: 1
     energyGainAfterPlay: 0
-    damageValues: 02000000030000000400000005000000
-    shieldValues: 01000000020000000300000004000000
+    damageValues: 03000000050000000700000009000000
+    shieldValues: 03000000050000000700000009000000
     playerLoseHpValues: 
     healFromDamageMultiplier: 0
   rootCanvas: {fileID: 0}
   dragScale: 1.1
+  isRewardCard: 0
+  selectionFrame: {fileID: 0}
