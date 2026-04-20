@@ -13,6 +13,7 @@ public class DeckManager : MonoBehaviour
     [Header("References")]
     public Transform handZone;
     public HandLayout handLayout;
+    public Transform discardZone;
 
     private List<Card> drawPile = new List<Card>();
     private List<Card> discardPile = new List<Card>();
@@ -86,7 +87,7 @@ public class DeckManager : MonoBehaviour
     public void MoveToDiscard(Card card)
     {
         card.gameObject.SetActive(false);
-        card.transform.SetParent(transform);
+        card.transform.SetParent(discardZone, false);
 
         discardPile.Add(card);
     }
@@ -127,7 +128,7 @@ public class DeckManager : MonoBehaviour
 
         foreach (Card prefab in DeckRuntimeManager.Instance.CurrentDeck)
         {
-            Card newCard = Instantiate(prefab, transform);
+            Card newCard = Instantiate(prefab, handZone);
             newCard.gameObject.SetActive(false);
             drawPile.Add(newCard);
         }

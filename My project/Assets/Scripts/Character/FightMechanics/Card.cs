@@ -159,10 +159,10 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         originalPosition = rectTransform.position;
         originalScale = rectTransform.localScale;
 
-        transform.SetParent(rootCanvas.transform, true);
+        transform.SetParent(rootCanvas.transform, false);
         transform.SetAsLastSibling();
 
-        rectTransform.localScale = originalScale * dragScale;
+        rectTransform.localScale = Vector3.one * dragScale;
         canvasGroup.blocksRaycasts = false;
         canvasGroup.alpha = 0.85f;
     }
@@ -190,7 +190,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         isDragging = false;
         canvasGroup.blocksRaycasts = true;
         canvasGroup.alpha = 1f;
-        rectTransform.localScale = originalScale;
+        rectTransform.localScale = Vector3.one;
     
         EnemyUnit enemy = GetEnemyUnderMouse(eventData);
     
@@ -443,10 +443,10 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
     private void ReturnToHand()
     {
-        transform.SetParent(originalParent, true);
+        transform.SetParent(originalParent, false);
         transform.SetSiblingIndex(originalSiblingIndex);
         rectTransform.position = originalPosition;
-        rectTransform.localScale = originalScale;
+        rectTransform.localScale = Vector3.one;
 
         Debug.Log($"Card [{cardName}] was back to hand.");
     }
