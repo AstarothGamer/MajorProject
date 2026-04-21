@@ -44,6 +44,9 @@ public class PauseMenu : MonoBehaviour
 
     public void MainMenu()
     {
+        PlayerRuntimeManager.Instance.ResetStats();
+        DeckRuntimeManager.Instance.ResetDeckToStarter();
+        LevelManager.Instance.ResetProgress();
         Time.timeScale = 1f;
         SceneManager.LoadScene("Main Menu");
     }

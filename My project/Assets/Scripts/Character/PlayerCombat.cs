@@ -5,7 +5,6 @@ public class PlayerCombat : MonoBehaviour
 {
     [Header("Player Stats")]
     public int maxHp = 100;
-    public int currentHp = 100;
 
     [Header("Energy")]
     public int maxEnergy = 3;
@@ -29,7 +28,8 @@ public class PlayerCombat : MonoBehaviour
 
     void Start()
     {
-        hp.text = $"HP: {currentHp}";
+        ResetEnergy();
+        hp.text = $"HP: {PlayerRuntimeManager.Instance.currentHp}";
         shield.text = $"Shield: {shieldForCurrentTurn}";
         energy.text = $"Energy: {currentEnergy}";
     }
@@ -63,12 +63,10 @@ public class PlayerCombat : MonoBehaviour
 
     public void Heal(int value)
     {
-        currentHp += value;
-        if (currentHp > maxHp)
-            currentHp = maxHp;
+        PlayerRuntimeManager.Instance.Heal(value);
         
-        hp.text = $"HP: {currentHp}";
-        Debug.Log($"Player got {value} HP. HP: {currentHp}/{maxHp}");
+        hp.text = $"HP: {PlayerRuntimeManager.Instance.currentHp}";
+        Debug.Log($"Player got {value} HP. HP: {PlayerRuntimeManager.Instance.currentHp}/{maxHp}");
     }
 
     public void TakeDamage(int value)
@@ -85,16 +83,11 @@ public class PlayerCombat : MonoBehaviour
 
         if (damageLeft > 0)
         {
-            currentHp -= damageLeft;
-            if (currentHp <= 0)
-            {
-                currentHp = 0;
-                gameOver.Show();
-            }
-            hp.text = $"HP: {currentHp}";
+            PlayerRuntimeManager.Instance.TakeDamage(damageLeft);
+            hp.text = $"HP: {PlayerRuntimeManager.Instance.currentHp}";
         }
 
-        Debug.Log($"Player got {value} damage. HP: {currentHp}/{maxHp}, Shield: {shieldForCurrentTurn}");
+        Debug.Log($"Player got {value} damage. HP: {PlayerRuntimeManager.Instance.currentHp}/{maxHp}, Shield: {shieldForCurrentTurn}");
     }
 
     public void ResetShieldAtEndTurn()

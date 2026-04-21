@@ -708,6 +708,7 @@ MonoBehaviour:
   - {fileID: 6606283791296407199, guid: 5c51fd90fbb0031418d75362c02ef528, type: 3}
   - {fileID: 6606283791296407199, guid: 5c51fd90fbb0031418d75362c02ef528, type: 3}
   - {fileID: 6606283791296407199, guid: 5c51fd90fbb0031418d75362c02ef528, type: 3}
+  currentDeck: []
 --- !u!4 &292441831
 Transform:
   m_ObjectHideFlags: 0
@@ -1039,6 +1040,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 589129065}
   m_CullTransparentMesh: 1
+--- !u!1 &595345778
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 595345780}
+  - component: {fileID: 595345779}
+  m_Layer: 0
+  m_Name: PlayerRuntimeManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &595345779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 595345778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0d45c4e41d6d8a4d9166207003b7df8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerRuntimeManager
+  maxHp: 100
+--- !u!4 &595345780
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 595345778}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -14.35274, y: 3.07559, z: 7.40602}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &750816048
 GameObject:
   m_ObjectHideFlags: 0
@@ -1490,3 +1536,4 @@ SceneRoots:
   - {fileID: 83197095}
   - {fileID: 1122181698}
   - {fileID: 292441831}
+  - {fileID: 595345780}
