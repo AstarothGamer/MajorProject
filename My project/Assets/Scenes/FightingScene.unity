@@ -11804,7 +11804,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCombat
   maxHp: 100
-  currentHp: 100
   maxEnergy: 3
   currentEnergy: 3
   shieldForCurrentTurn: 0
