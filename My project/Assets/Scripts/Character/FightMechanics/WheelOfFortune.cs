@@ -12,6 +12,7 @@ public class WheelOfFortune : MonoBehaviour
     [SerializeField] private RectTransform wheelRoot;   
     [SerializeField] private TMP_Text labelPrefab;
     [SerializeField] private GameObject wheel;
+    [SerializeField] private GameObject wheelHolder;
     private TurnManager turnManager;
     
     [Header("Labels")]
@@ -63,6 +64,7 @@ public class WheelOfFortune : MonoBehaviour
 
     private void ShowWheel()
     {
+        wheelHolder.SetActive(true);
         wheel.SetActive(true);
     }
 
@@ -72,6 +74,7 @@ public class WheelOfFortune : MonoBehaviour
             turnManager.EndAction();
         
         wheel.SetActive(false);
+        wheelHolder.SetActive(false);
     }
     
     private IEnumerator HideAfterDelay()
