@@ -37,6 +37,6 @@ public class LevelButton : MonoBehaviour
         if (!LevelManager.Instance.IsLevelUnlocked(levelIndex))
             return;
 
-        SceneManager.LoadScene(levelIndex + 2);
+        SceneManager.LoadScene(levelIndex + 3);
     }
 }
