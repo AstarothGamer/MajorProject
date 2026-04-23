@@ -871,15 +871,15 @@ MonoBehaviour:
   storyText: {fileID: 1405228055}
   storyParts:
   - "Long ago\u2026 ere thy time\u2026 the sky was broken. It opened not as in fair
-    weather,nay\u2026 it was torn asunder.\n\nA great light fell from the heavens.\nNot
+    weather, nay\u2026 it was torn asunder.\n\nA great light fell from the heavens.\nNot
     warm\u2026 nor holy\u2026\n\nThe people beheld it,\nand fell upon their knees.
     And when it struck\u2026"
   - "The world was undone. For but a fleeting moment,\nnaught held fast its proper
     form.\n\nMen beheld lives they had never lived.\nCities did rise\u2026 and were
     unmade.\nThe dead did stir\u2026 and the living were as naught.\n\nThen\u2026
     it was stilled. The heavens were sealed once more. The world was made whole again\n"
-  - yet not as it had been.
-  typingSpeed: 0.03
+  - Yet not as it had been.
+  typingSpeed: 0.07
   nextSceneName: Map
 --- !u!4 &1931850135
 Transform:
