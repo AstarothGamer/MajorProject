@@ -109,7 +109,7 @@ MonoBehaviour:
     energyCost: 1
     energyGainAfterPlay: 0
     damageValues: 
-    shieldValues: 03000000060000000a0000000d000000
+    shieldValues: 0400000006000000090000000c000000
     playerLoseHpValues: 
     healFromDamageMultiplier: 0
   rootCanvas: {fileID: 0}
