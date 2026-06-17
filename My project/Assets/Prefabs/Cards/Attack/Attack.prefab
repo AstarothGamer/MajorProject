@@ -108,7 +108,7 @@ MonoBehaviour:
   effects:
     energyCost: 1
     energyGainAfterPlay: 0
-    damageValues: 05000000060000000700000008000000
+    damageValues: 05000000070000000b0000000f000000
     shieldValues: 
     playerLoseHpValues: 
     healFromDamageMultiplier: 0
