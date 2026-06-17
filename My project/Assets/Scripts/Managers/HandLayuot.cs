@@ -32,7 +32,7 @@ public class HandLayout : MonoBehaviour
 
             RectTransform rect = card.GetComponent<RectTransform>();
 
-            rect.anchoredPosition = new Vector2(x, yTransform);
+            rect.anchoredPosition = new Vector2(x, yTransform + y);
             rect.localRotation = Quaternion.Euler(0, 0, angle);
         }
     }

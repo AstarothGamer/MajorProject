@@ -53,6 +53,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     [Header("Drag Settings")]
     [SerializeField] private Canvas rootCanvas;
     [SerializeField] private float dragScale = 1.1f;
+    [SerializeField] private float dragFollowSmoothTime = 0.06f;
     
     [Header("Reward Mode")]
     public bool isRewardCard = false;
@@ -69,6 +70,10 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     private Vector3 originalScale;
 
     private bool isDragging;
+    
+    private Vector3 dragTargetPosition;
+    private Vector3 dragVelocity;
+    private Vector3 dragPointerOffset;
 
     private CardHandZone currentHandZone;
     private CardPlayZone playZone;
@@ -76,6 +81,9 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     private DeckManager deckManager;
     private TurnManager turnManager;
     private WheelOfFortune wheel;
+    
+    private OutlineOnPoint outline;
+    private LayerMask layerMask;
     
     private int lastWheelIndex = 0;
     private bool wheelFinished = false;
@@ -106,6 +114,20 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
             wheel.OnSpinFinished.AddListener(OnWheelFinished);
         }
     }
+    
+    private void Update()
+    {
+        if (!isDragging)
+            return;
+
+        rectTransform.position = Vector3.SmoothDamp(
+            rectTransform.position,
+            dragTargetPosition,
+            ref dragVelocity,
+            dragFollowSmoothTime
+        );
+    }
+    
     public void SetOriginalPrefab(Card prefab)
     {
         originalPrefab = prefab;
@@ -159,12 +181,16 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         originalPosition = rectTransform.position;
         originalScale = rectTransform.localScale;
 
-        transform.SetParent(rootCanvas.transform, false);
+        transform.SetParent(rootCanvas.transform, true);
         transform.SetAsLastSibling();
 
         rectTransform.localScale = Vector3.one * dragScale;
         canvasGroup.blocksRaycasts = false;
         canvasGroup.alpha = 0.85f;
+        
+        dragPointerOffset = rectTransform.position - (Vector3)eventData.position;
+        dragTargetPosition = rectTransform.position;
+        dragVelocity = Vector3.zero;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -172,8 +198,11 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         if (isRewardCard) return;
         if (!isDragging)
             return;
+        
+        OutlineOnPoint outline = GetOutlineUnderMouse(eventData);
+        UpdateOutline(outline);
 
-        rectTransform.position = eventData.position;
+        dragTargetPosition = (Vector3)eventData.position + dragPointerOffset;
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -181,6 +210,9 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         if (isRewardCard) return;
         if (!isDragging)
             return;
+        
+        ClearOutline();
+        
         if (turnManager != null && turnManager.IsActionInProgress)
         {
             ReturnToHand();
@@ -223,6 +255,65 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         if (DescriptionPanel.Instance == null) return;
 
         DescriptionPanel.Instance.Hide();
+    }
+    
+    private OutlineOnPoint GetOutlineUnderMouse(PointerEventData eventData)
+    {
+        Ray ray = Camera.main.ScreenPointToRay(eventData.position);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, 100f))
+        {
+            return hit.collider.GetComponentInParent<OutlineOnPoint>();
+        }
+
+        return null;
+    }
+
+    private void UpdateOutline(OutlineOnPoint newOutline)
+    {
+        OutlineOnPoint validOutline = null;
+
+        if (newOutline != null)
+        {
+            switch (cardType)
+            {
+                case CardType.Attack:
+                    if (newOutline.GetComponent<EnemyUnit>() != null)
+                    {
+                        validOutline = newOutline;
+                    }
+                    break;
+                case CardType.Passive:
+                case CardType.Skill:
+                {
+                    if (newOutline.GetComponent<PlayerCombat>() != null)
+                    {
+                        validOutline = newOutline;
+                    }
+                }   
+                    break;
+            }
+        }
+        
+        if(outline == validOutline)
+            return;
+        
+        if(outline != null)
+            outline.Outline(false);
+        
+        outline = newOutline;
+
+        if (outline != null)
+            outline.Outline(true);
+    }
+
+    private void ClearOutline()
+    {
+        if (outline != null)
+        {
+            outline.Outline(false);
+            outline = null;
+        }
     }
     
     private string GetFullDescription()

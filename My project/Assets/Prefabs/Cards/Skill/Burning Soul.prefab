@@ -116,5 +116,6 @@ MonoBehaviour:
     healFromDamageMultiplier: 0
   rootCanvas: {fileID: 0}
   dragScale: 1.1
+  dragFollowSmoothTime: 0.15
   isRewardCard: 0
   selectionFrame: {fileID: 0}

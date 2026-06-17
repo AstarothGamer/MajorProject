@@ -577,6 +577,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 860132908502817599, guid: 3293afecfb2dff74690135feb36488b6, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 926690942730218574, guid: 3293afecfb2dff74690135feb36488b6, type: 3}
       propertyPath: m_LocalRotation.w
       value: -0.7071068
@@ -646,9 +650,17 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1227004793663251879, guid: 3293afecfb2dff74690135feb36488b6, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1227004793663251879, guid: 3293afecfb2dff74690135feb36488b6, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: f8972868fe719c14f834c874c2ce1c1b, type: 2}
+    - target: {fileID: 1227004793663251879, guid: 3293afecfb2dff74690135feb36488b6, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d98437a0550b15942963ee99518ec071, type: 2}
     - target: {fileID: 1242988225953173750, guid: 3293afecfb2dff74690135feb36488b6, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -2267,6 +2279,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 122322829856814582, guid: 3293afecfb2dff74690135feb36488b6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1407192105}
+    - targetCorrespondingSourceObject: {fileID: 122322829856814582, guid: 3293afecfb2dff74690135feb36488b6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1407192108}
     - targetCorrespondingSourceObject: {fileID: 122322829856814582, guid: 3293afecfb2dff74690135feb36488b6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1407192104}
@@ -4218,8 +4233,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HandLayout
   spacing: 150
   maxWidth: 800
-  curveHeight: 0
-  rotationAngle: 0
+  curveHeight: 100
+  rotationAngle: -30
   yTransform: 100
 --- !u!1 &544156284
 GameObject:
@@ -11764,7 +11779,8 @@ GameObject:
   - component: {fileID: 1108773020}
   - component: {fileID: 1108773019}
   - component: {fileID: 1108773023}
-  m_Layer: 0
+  - component: {fileID: 1108773024}
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11820,6 +11836,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: d98437a0550b15942963ee99518ec071, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -11887,6 +11904,21 @@ MonoBehaviour:
   shield: {fileID: 1674270533}
   energy: {fileID: 572239160}
   gameOver: {fileID: 0}
+--- !u!114 &1108773024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1108773018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e0509f46c4d7a441831c4e870d5e8be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutlineOnPoint
+  targetRenderer: {fileID: 0}
+  material: {fileID: 0}
+  index: 1
 --- !u!1001 &1126013584
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13341,6 +13373,21 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3560575524512548510, guid: 3293afecfb2dff74690135feb36488b6, type: 3}
   m_PrefabInstance: {fileID: 93616123}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1407192108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1407192103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e0509f46c4d7a441831c4e870d5e8be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutlineOnPoint
+  targetRenderer: {fileID: 0}
+  material: {fileID: 0}
+  index: 1
 --- !u!1 &1428089486
 GameObject:
   m_ObjectHideFlags: 0
@@ -13997,6 +14044,21 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3560575524512548510, guid: 3293afecfb2dff74690135feb36488b6, type: 3}
   m_PrefabInstance: {fileID: 2096919912}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1592300367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592300362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e0509f46c4d7a441831c4e870d5e8be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutlineOnPoint
+  targetRenderer: {fileID: 0}
+  material: {fileID: 0}
+  index: 1
 --- !u!4 &1604434555 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 88338dd412d52424ea9637fc245b59de, type: 3}
@@ -20307,6 +20369,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 860132908502817599, guid: 3293afecfb2dff74690135feb36488b6, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 926690942730218574, guid: 3293afecfb2dff74690135feb36488b6, type: 3}
       propertyPath: m_LocalRotation.w
       value: -0.7071068
@@ -20368,9 +20434,17 @@ PrefabInstance:
       value: -0.70710677
       objectReference: {fileID: 0}
     - target: {fileID: 1227004793663251879, guid: 3293afecfb2dff74690135feb36488b6, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1227004793663251879, guid: 3293afecfb2dff74690135feb36488b6, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: f8972868fe719c14f834c874c2ce1c1b, type: 2}
+    - target: {fileID: 1227004793663251879, guid: 3293afecfb2dff74690135feb36488b6, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d98437a0550b15942963ee99518ec071, type: 2}
     - target: {fileID: 1242988225953173750, guid: 3293afecfb2dff74690135feb36488b6, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -21861,6 +21935,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 122322829856814582, guid: 3293afecfb2dff74690135feb36488b6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1592300364}
+    - targetCorrespondingSourceObject: {fileID: 122322829856814582, guid: 3293afecfb2dff74690135feb36488b6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1592300367}
     - targetCorrespondingSourceObject: {fileID: 122322829856814582, guid: 3293afecfb2dff74690135feb36488b6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1592300363}
