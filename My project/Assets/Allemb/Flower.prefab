@@ -1790,8 +1790,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7510001065940461370}
-  - component: {fileID: 3739553926858376741}
-  - component: {fileID: 7730750917559208228}
   m_Layer: 0
   m_Name: Flower
   m_TagString: Untagged
@@ -1834,61 +1832,6 @@ Transform:
   - {fileID: 6733251439805197635}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3739553926858376741
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6394452091958638063}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6983ab2008f7a9f499b3f8cd6bec328d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Formats.Alembic.Runtime::UnityEngine.Formats.Alembic.Importer.AlembicStreamPlayer
-  streamSource: 0
-  streamDescriptor: {fileID: 8657741744184030440, guid: 548c1041cc4fde54aac161a25200e093, type: 3}
-  embeddedStreamDescriptor:
-    pathToAbc: 
-    settings:
-      normals: 1
-      tangents: 1
-      cameraAspectRatio: 2
-      importVisibility: 1
-      scaleFactor: 0.01
-      swapHandedness: 1
-      flipFaces: 0
-      interpolateSamples: 1
-      importPointPolygon: 1
-      importLinePolygon: 1
-      importTrianglePolygon: 1
-      importXform: 1
-      importCameras: 1
-      importMeshes: 1
-      importPoints: 0
-      importCurves: 1
-      createCurveRenderers: 0
-    mediaStartTime: 0
-    mediaEndTime: 0
-  startTime: 4.38967
-  endTime: 22.916666
-  currentTime: 0
-  vertexMotionScale: 1
---- !u!114 &7730750917559208228
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6394452091958638063}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9da41501559bba94c837d4f002d1ad31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AllembicFlowerPlay
-  playbackSpeed: 1
-  playOnStart: 1
-  loop: 1
 --- !u!1 &6406436153657997951
 GameObject:
   m_ObjectHideFlags: 0
