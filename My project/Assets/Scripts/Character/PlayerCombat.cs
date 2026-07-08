@@ -19,6 +19,9 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private TMP_Text shield;
     [SerializeField] private TMP_Text energy;
     
+    [Header("VFX and Audio")]
+    [SerializeField] private GameObject particleEffect;
+    
     [SerializeField] GameOver gameOver;
 
     void Awake()

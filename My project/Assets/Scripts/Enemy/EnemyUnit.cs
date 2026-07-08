@@ -21,6 +21,9 @@ public class EnemyUnit : MonoBehaviour
     [SerializeField] TMP_Text enemyTakeDamageText;
     [SerializeField] TMP_Text enemyText;
     [SerializeField] TMP_Text nextTurnText;
+    
+    [Header("VFX and Audio")]
+    [SerializeField] private GameObject particleEffect;
 
     // [Header("Optional Multi Target Setup")]
     // public List<EnemyUnit> additionalTargets = new List<EnemyUnit>();
@@ -86,6 +89,7 @@ public class EnemyUnit : MonoBehaviour
             yield return new WaitForSeconds(2f);
 
             player.TakeDamage(currentDamage);
+            Instantiate(particleEffect, player.transform.position, Quaternion.identity);
         }
         else
         {

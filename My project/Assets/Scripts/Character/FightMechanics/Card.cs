@@ -66,6 +66,9 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     [SerializeField] private float hoverLift = 70f;
     [SerializeField] private float hoverAnimationSpeed = 12f;
     [SerializeField] private GameObject hoverHighlight;
+
+    [Header("Visual and Audio")] [SerializeField]
+    private GameObject particleEffect;
     
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
@@ -635,6 +638,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
                 int dealt = enemy.TakeDamage(damage);
                 totalDamageDealt += dealt;
+                Instantiate(particleEffect, enemy.transform.position, Quaternion.identity);
             }
         }
 
@@ -673,6 +677,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     private void FinishPlay()
     {
         Debug.Log($"Card [{cardName}] has been played.");
+
         
         // Add VFX and SFX
         // discarding cards 

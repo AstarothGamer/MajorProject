@@ -121,3 +121,4 @@ MonoBehaviour:
   hoverLift: 70
   hoverAnimationSpeed: 12
   hoverHighlight: {fileID: 0}
+  particleEffect: {fileID: 3074043316621499458, guid: aa9e3fa8bd041c24db96e14b4bdc378a, type: 3}
