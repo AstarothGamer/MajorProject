@@ -61,6 +61,12 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     [SerializeField] private GameObject selectionFrame;
     private Card originalPrefab;
     
+    [Header("Hover Settings")]
+    [SerializeField] private float hoverScale = 1.15f;
+    [SerializeField] private float hoverLift = 70f;
+    [SerializeField] private float hoverAnimationSpeed = 12f;
+    [SerializeField] private GameObject hoverHighlight;
+    
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
 
@@ -70,10 +76,19 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     private Vector3 originalScale;
 
     private bool isDragging;
+    private bool isResolvingPlay;
     
     private Vector3 dragTargetPosition;
     private Vector3 dragVelocity;
     private Vector3 dragPointerOffset;
+    
+    private Vector2 layoutPosition;
+    private Quaternion layoutRotation;
+    private Vector3 baseScale;
+
+    private bool layoutInitialized;
+    private bool isHovered;
+    private int hoverSiblingIndex;
 
     private CardHandZone currentHandZone;
     private CardPlayZone playZone;
@@ -88,10 +103,17 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     private int lastWheelIndex = 0;
     private bool wheelFinished = false;
 
+    #region Unity Functions
+
     void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
+        
+        baseScale = rectTransform.localScale;
+
+        if (hoverHighlight != null)
+            hoverHighlight.SetActive(false);
 
         if (rootCanvas == null)
             rootCanvas = GetComponentInParent<Canvas>();
@@ -117,15 +139,84 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     
     private void Update()
     {
-        if (!isDragging)
+        if (isDragging)
+        {
+            rectTransform.position =
+                Vector3.SmoothDamp(
+                    rectTransform.position,
+                    dragTargetPosition,
+                    ref dragVelocity,
+                    dragFollowSmoothTime
+                );
+
+            return;
+        }
+        
+        if (isResolvingPlay)
             return;
 
-        rectTransform.position = Vector3.SmoothDamp(
-            rectTransform.position,
-            dragTargetPosition,
-            ref dragVelocity,
-            dragFollowSmoothTime
-        );
+        if (!layoutInitialized)
+            return;
+
+        float animationStep = 1f - Mathf.Exp(-hoverAnimationSpeed * Time.deltaTime);
+
+        Vector2 targetPosition = layoutPosition;
+
+        Quaternion targetRotation = layoutRotation;
+
+        Vector3 targetScale = baseScale;
+
+        if (isHovered)
+        {
+            targetPosition += Vector2.up * hoverLift;
+
+            targetScale = baseScale * hoverScale;
+
+            targetRotation = Quaternion.identity;
+        }
+
+        rectTransform.anchoredPosition =
+            Vector2.Lerp(
+                rectTransform.anchoredPosition,
+                targetPosition,
+                animationStep
+            );
+
+        rectTransform.localScale =
+            Vector3.Lerp(
+                rectTransform.localScale,
+                targetScale,
+                animationStep
+            );
+
+        rectTransform.localRotation =
+            Quaternion.Slerp(
+                rectTransform.localRotation,
+                targetRotation,
+                animationStep
+            );
+    }
+
+    #endregion
+    
+    
+    private void HoldCardAtPlayPosition()
+    {
+        isDragging = false;
+        isHovered = false;
+        isResolvingPlay = true;
+
+        dragVelocity = Vector3.zero;
+
+        canvasGroup.blocksRaycasts = false;
+        canvasGroup.alpha = 1f;
+
+        rectTransform.localScale = baseScale;
+
+        transform.SetAsLastSibling();
+
+        if (hoverHighlight != null)
+            hoverHighlight.SetActive(false);
     }
     
     public void SetOriginalPrefab(Card prefab)
@@ -159,12 +250,9 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         }
     }
     
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        if (!isRewardCard) return;
+    
 
-        OnRewardSelected?.Invoke(this);
-    }
+    #region Drag
 
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -177,14 +265,20 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         isDragging = true;
 
         originalParent = transform.parent;
-        originalSiblingIndex = transform.GetSiblingIndex();
+        originalSiblingIndex = isHovered ? hoverSiblingIndex : transform.GetSiblingIndex();
+        
+        isHovered = false;
+        
         originalPosition = rectTransform.position;
         originalScale = rectTransform.localScale;
+        
+        if (hoverHighlight != null)
+            hoverHighlight.SetActive(false);
 
         transform.SetParent(rootCanvas.transform, true);
         transform.SetAsLastSibling();
 
-        rectTransform.localScale = Vector3.one * dragScale;
+        rectTransform.localScale = baseScale * dragScale;
         canvasGroup.blocksRaycasts = false;
         canvasGroup.alpha = 0.85f;
         
@@ -233,28 +327,100 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
             zone = dropObject.GetComponentInParent<CardPlayZone>();
     
         if (TryPlayCardHybrid(enemy, zone))
+        {
+            HoldCardAtPlayPosition();
             return;
+        }
     
         ReturnToHand();
+    }
+
+    #endregion
+    
+    #region Pointer
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (!isRewardCard) return;
+
+        OnRewardSelected?.Invoke(this);
     }
     
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (DescriptionPanel.Instance == null) return;
+        if (!isDragging && !isHovered)
+        {
+            isHovered = true;
 
-        DescriptionPanel.Instance.Show(
-            cardName,
-            description,
-            GetFullDescription(),
-            eventData.position + new Vector2(200, -50)
-        );
+            hoverSiblingIndex =
+                transform.GetSiblingIndex();
+
+            transform.SetAsLastSibling();
+
+            if (hoverHighlight != null)
+                hoverHighlight.SetActive(true);
+        }
+
+        if (DescriptionPanel.Instance != null)
+        {
+            DescriptionPanel.Instance.Show(
+                cardName,
+                description,
+                GetFullDescription(),
+                eventData.position +
+                new Vector2(200f, -50f)
+            );
+        }
     }
     
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (DescriptionPanel.Instance == null) return;
+        if (!isDragging && isHovered)
+        {
+            isHovered = false;
 
-        DescriptionPanel.Instance.Hide();
+            if (hoverHighlight != null)
+                hoverHighlight.SetActive(false);
+
+            if (transform.parent != null)
+            {
+                int siblingIndex = Mathf.Clamp(
+                    hoverSiblingIndex,
+                    0,
+                    transform.parent.childCount - 1
+                );
+
+                transform.SetSiblingIndex(
+                    siblingIndex
+                );
+            }
+        }
+
+        if (DescriptionPanel.Instance != null)
+            DescriptionPanel.Instance.Hide();
+    }
+    #endregion
+    
+    public void SetLayoutTransform(
+        Vector2 position,
+        float angle)
+    {
+        layoutPosition = position;
+        layoutRotation = Quaternion.Euler(
+            0f,
+            0f,
+            angle
+        );
+
+        if (!layoutInitialized)
+        {
+            rectTransform.anchoredPosition =
+                layoutPosition;
+
+            rectTransform.localRotation =
+                layoutRotation;
+
+            layoutInitialized = true;
+        }
     }
     
     private OutlineOnPoint GetOutlineUnderMouse(PointerEventData eventData)
@@ -534,11 +700,24 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
     private void ReturnToHand()
     {
-        transform.SetParent(originalParent, false);
-        transform.SetSiblingIndex(originalSiblingIndex);
-        rectTransform.position = originalPosition;
-        rectTransform.localScale = Vector3.one;
+        isDragging = false;
+        isHovered = false;
+        isResolvingPlay = false;
 
-        Debug.Log($"Card [{cardName}] was back to hand.");
+        transform.SetParent(originalParent, true);
+
+        transform.SetSiblingIndex(originalSiblingIndex);
+
+        canvasGroup.blocksRaycasts = true;
+        canvasGroup.alpha = 1f;
+
+        dragVelocity = Vector3.zero;
+
+        if (hoverHighlight != null)
+            hoverHighlight.SetActive(false);
+
+        Debug.Log(
+            $"Card [{cardName}] was back to hand."
+        );
     }
 }

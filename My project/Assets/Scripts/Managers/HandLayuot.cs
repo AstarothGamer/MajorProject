@@ -30,10 +30,7 @@ public class HandLayout : MonoBehaviour
 
             float angle = Mathf.Lerp(-rotationAngle, rotationAngle, t);
 
-            RectTransform rect = card.GetComponent<RectTransform>();
-
-            rect.anchoredPosition = new Vector2(x, yTransform + y);
-            rect.localRotation = Quaternion.Euler(0, 0, angle);
+            card.SetLayoutTransform(new Vector2(x, yTransform + y), angle);
         }
     }
 }
