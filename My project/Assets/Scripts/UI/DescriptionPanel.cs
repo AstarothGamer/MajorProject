@@ -24,7 +24,7 @@ public class DescriptionPanel : MonoBehaviour
         descriptionText.text = description;
         statText.text = stats;
 
-        root.transform.position = position;
+        root.transform.position = position + new Vector2(0f, 300f);
     }
 
     public void Hide()
