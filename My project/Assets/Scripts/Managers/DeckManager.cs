@@ -67,6 +67,8 @@ public class DeckManager : MonoBehaviour
     {
         card.gameObject.SetActive(true);
         card.transform.SetParent(handZone, false);
+        
+        card.PrepareForHand();
 
         hand.Add(card);
         handLayout.UpdateLayout(hand);

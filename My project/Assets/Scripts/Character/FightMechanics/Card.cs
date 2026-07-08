@@ -400,24 +400,16 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     }
     #endregion
     
-    public void SetLayoutTransform(
-        Vector2 position,
-        float angle)
+    public void SetLayoutTransform(Vector2 position, float angle)
     {
         layoutPosition = position;
-        layoutRotation = Quaternion.Euler(
-            0f,
-            0f,
-            angle
-        );
+        layoutRotation = Quaternion.Euler(0f, 0f, angle);
 
         if (!layoutInitialized)
         {
-            rectTransform.anchoredPosition =
-                layoutPosition;
+            rectTransform.anchoredPosition = layoutPosition;
 
-            rectTransform.localRotation =
-                layoutRotation;
+            rectTransform.localRotation = layoutRotation;
 
             layoutInitialized = true;
         }
@@ -697,6 +689,31 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         }
     }
     
+    public void ResetCardState()
+    {
+        isDragging = false;
+        isHovered = false;
+        isResolvingPlay = false;
+
+        dragVelocity = Vector3.zero;
+
+        canvasGroup.blocksRaycasts = true;
+        canvasGroup.alpha = 1f;
+
+        rectTransform.localScale = baseScale;
+
+        if (hoverHighlight != null)
+            hoverHighlight.SetActive(false);
+
+        ClearOutline();
+    }
+
+    public void PrepareForHand()
+    {
+        ResetCardState();
+
+        layoutInitialized = false;
+    }
 
     private void ReturnToHand()
     {
@@ -716,8 +733,6 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         if (hoverHighlight != null)
             hoverHighlight.SetActive(false);
 
-        Debug.Log(
-            $"Card [{cardName}] was back to hand."
-        );
+        Debug.Log($"Card [{cardName}] was back to hand.");
     }
 }
