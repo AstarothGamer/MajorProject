@@ -1220,7 +1220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0d45c4e41d6d8a4d9166207003b7df8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerRuntimeManager
-  maxHp: 10
+  maxHp: 100
 --- !u!4 &595345780
 Transform:
   m_ObjectHideFlags: 0
