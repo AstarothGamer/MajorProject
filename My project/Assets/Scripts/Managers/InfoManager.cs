@@ -44,7 +44,7 @@ public class InfoManager : MonoBehaviour
 
         if (playerHealth != null)
         {
-            playerHealth.text = PlayerRuntimeManager.Instance.currentHp.ToString();
+            playerHealth.text = PlayerRuntimeManager.Instance.currentHp.ToString() + '/' + PlayerRuntimeManager.Instance.MaxHp.ToString();
         }
 
         if (playerEnergy != null)
