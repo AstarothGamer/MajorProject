@@ -33,9 +33,12 @@ public class PlayerRuntimeManager : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHp -= damage;
-        if (currentHp < 0)
+        if (currentHp <= 0)
+        {
             currentHp = 0;
-
+            GameOver.Instance.Show();
+        }
+        
         Debug.Log($"Player HP: {currentHp}/{maxHp}");
     }
 

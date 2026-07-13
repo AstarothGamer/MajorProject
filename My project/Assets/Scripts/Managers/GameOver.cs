@@ -3,7 +3,24 @@ using UnityEngine.SceneManagement;
 
 public class GameOver : MonoBehaviour
 {
+    public static GameOver Instance { get; private set; }
+    
     public GameObject gameOverPanel;
+    
+    private void Awake()
+    {
+        Instance = this;
+
+        if (gameOverPanel != null)
+            gameOverPanel.SetActive(false);
+    }
+    
+    
+    private void OnDestroy()
+    {
+        if (Instance == this)
+            Instance = null;
+    }
 
     public void Show()
     {
@@ -12,7 +29,7 @@ public class GameOver : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(0);
     }
 
     public void Quit()
