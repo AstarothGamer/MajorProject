@@ -2159,7 +2159,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 684, y: -12.9999695}
+  m_AnchoredPosition: {x: 684, y: -13}
   m_SizeDelta: {x: 120.6, y: 77.2}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &466368292
@@ -11133,6 +11133,58 @@ Transform:
   - {fileID: 1638834354}
   - {fileID: 864988881}
   m_Father: {fileID: 770501105}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1236429490
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1236429492}
+  - component: {fileID: 1236429491}
+  m_Layer: 0
+  m_Name: InfoManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1236429491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1236429490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c892f0344310a0428c4e1f8985953a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InfoManager
+  currentLevel: {fileID: 2093433959}
+  currentAvailableLevel: {fileID: 0}
+  drawPileCount: {fileID: 1623041281}
+  discardPileCount: {fileID: 858380632}
+  playerHealth: {fileID: 1252820406}
+  playerEnergy: {fileID: 2047076931}
+  deckManager: {fileID: 1359839829}
+  player: {fileID: 1108773023}
+--- !u!4 &1236429492
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1236429490}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3229.2358, y: -0.00001, z: 31562.648}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1252820404
 GameObject:
@@ -20522,3 +20574,4 @@ SceneRoots:
   - {fileID: 5857850454947570568}
   - {fileID: 3355267576404894214}
   - {fileID: 770501105}
+  - {fileID: 1236429492}

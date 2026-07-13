@@ -154,4 +154,34 @@ public class RunMapManager : MonoBehaviour
 
         SceneManager.LoadScene(targetScene);
     }
+
+    public int CurrentLevel
+    {
+        get
+        {
+            return CurrentRow + 1;
+        }
+    }
+    
+    public int CurrentAvailableLevel
+    {
+        get
+        {
+            if (CurrentMap == null)
+                return 0;
+            
+            if (CurrentNodeId < 0)
+                return 1;
+
+            MapNodeData currentNode = CurrentMap.GetNode(CurrentNodeId);
+
+            if (currentNode == null)
+                return 1;
+
+            if (currentNode.nextNodeIds == null || currentNode.nextNodeIds.Count == 0)
+                return currentNode.row + 1;
+
+            return currentNode.row + 2;
+        }
+    }
 }

@@ -740,4 +740,10 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
         Debug.Log($"Card [{cardName}] was back to hand.");
     }
+    
+    public void SetBaseScale(float scale)
+    {
+        baseScale = Vector3.one * scale;
+        rectTransform.localScale = baseScale;
+    }
 }

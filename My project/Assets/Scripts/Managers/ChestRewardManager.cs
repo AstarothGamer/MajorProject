@@ -46,7 +46,7 @@ public class ChestRewardManager : MonoBehaviour
             Card card = Instantiate(prefab, rewardHandLayout);
             
             card.transform.SetParent(rewardHandLayout, false);
-            card.transform.localScale *= 3;
+            card.SetBaseScale(6f);
 
             card.isRewardCard = true;
             card.SetOriginalPrefab(prefab);

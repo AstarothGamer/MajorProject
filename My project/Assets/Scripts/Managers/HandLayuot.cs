@@ -31,6 +31,8 @@ public class HandLayout : MonoBehaviour
             float angle = Mathf.Lerp(-rotationAngle, rotationAngle, t);
 
             card.SetLayoutTransform(new Vector2(x, yTransform + y), angle);
+            
+            card.transform.SetSiblingIndex(i);
         }
     }
 }

@@ -137,4 +137,20 @@ public class DeckManager : MonoBehaviour
 
         Shuffle(drawPile);
     }
+
+    public int DrawPileCount
+    {
+        get
+        {
+            return drawPile.Count;
+        }
+    }
+    
+    public int DiscardPileCount
+    {
+        get
+        {
+            return discardPile.Count;
+        }
+    }
 }
