@@ -58,6 +58,6 @@ public class VictoryManager : MonoBehaviour
 
     public void GoToMap()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(1);
     }
 }
