@@ -622,6 +622,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         int loseHp = GetValueFromWheelIndex(effects.playerLoseHpValues, wheelIndex);
 
         int totalDamageDealt = 0;
+        int healValue = 0;
 
         if (shield > 0)
             playerCombat.AddShieldForOneTurn(shield);
@@ -638,19 +639,37 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
                 int dealt = enemy.TakeDamage(damage);
                 totalDamageDealt += dealt;
-                Instantiate(particleEffect, enemy.transform.position, Quaternion.identity);
+
+                if (particleEffect != null)
+                    Instantiate(
+                        particleEffect,
+                        enemy.transform.position,
+                        Quaternion.identity
+                    );
             }
         }
 
         if (effects.healFromDamageMultiplier > 0f && totalDamageDealt > 0)
         {
-            int healValue = Mathf.RoundToInt(totalDamageDealt * effects.healFromDamageMultiplier);
+            healValue = Mathf.RoundToInt(
+                totalDamageDealt * effects.healFromDamageMultiplier
+            );
+
             if (healValue > 0)
                 playerCombat.Heal(healValue);
         }
 
         if (effects.energyGainAfterPlay > 0)
             playerCombat.GainEnergy(effects.energyGainAfterPlay);
+
+        ShowPlayedValuesNotification(
+            wheelIndex,
+            damage,
+            shield,
+            loseHp,
+            totalDamageDealt,
+            healValue
+        );
 
         FinishPlay();
     }
@@ -745,5 +764,33 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     {
         baseScale = Vector3.one * scale;
         rectTransform.localScale = baseScale;
+    }
+    
+    private void ShowPlayedValuesNotification(int wheelIndex, int damage, int shield, int loseHp, int totalDamageDealt, int healValue)
+    {
+        if (PlayedCardNotification.Instance == null)
+            return;
+
+        string message = $"Wheel: {wheelIndex + 1}\n";
+
+        if (damage > 0)
+            message += $"Damage: {damage}\n";
+
+        if (totalDamageDealt > 0)
+            message += $"Total damage dealt: {totalDamageDealt}\n";
+
+        if (shield > 0)
+            message += $"Block: {shield}\n";
+
+        if (loseHp > 0)
+            message += $"Player lost HP: {loseHp}\n";
+
+        if (healValue > 0)
+            message += $"Healed: {healValue}\n";
+
+        if (effects.energyGainAfterPlay > 0)
+            message += $"Energy gained: {effects.energyGainAfterPlay}\n";
+
+        PlayedCardNotification.Instance.Show(message);
     }
 }
