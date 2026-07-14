@@ -21,6 +21,7 @@ public class PlayerCombat : MonoBehaviour
     
     [Header("VFX and Audio")]
     [SerializeField] private GameObject particleEffect;
+    [SerializeField] private Transform floatingTextPoint;
     
     [SerializeField] GameOver gameOver;
 
@@ -75,22 +76,52 @@ public class PlayerCombat : MonoBehaviour
     public void TakeDamage(int value)
     {
         int damageLeft = value;
+        int absorbed = 0;
+        int hpDamage = 0;
+        
+        Vector3 textPosition = floatingTextPoint != null ? floatingTextPoint.position : transform.position;
 
         if (shieldForCurrentTurn > 0)
         {
-            int absorbed = Mathf.Min(shieldForCurrentTurn, damageLeft);
+            absorbed = Mathf.Min(shieldForCurrentTurn, damageLeft);
+
             shieldForCurrentTurn -= absorbed;
             damageLeft -= absorbed;
+
             shield.text = $"Shield: {shieldForCurrentTurn}";
+
+            if (FloatingCombatTextManager.Instance != null)
+            {
+                FloatingCombatTextManager.Instance.SpawnShieldDamage(absorbed, textPosition);
+            }
         }
 
         if (damageLeft > 0)
         {
-            PlayerRuntimeManager.Instance.TakeDamage(damageLeft);
+            hpDamage = damageLeft;
+
+            PlayerRuntimeManager.Instance.TakeDamage(hpDamage);
+
             hp.text = $"HP: {PlayerRuntimeManager.Instance.currentHp}";
+
+            if (FloatingCombatTextManager.Instance != null)
+            {
+                FloatingCombatTextManager.Instance.SpawnHpDamage(hpDamage, textPosition);
+            }
+
+            if (particleEffect != null)
+            {
+                Instantiate(particleEffect, transform.position, Quaternion.identity);
+            }
         }
 
-        Debug.Log($"Player got {value} damage. HP: {PlayerRuntimeManager.Instance.currentHp}/{maxHp}, Shield: {shieldForCurrentTurn}");
+        Debug.Log(
+            $"Player got {value} damage. " +
+            $"Shield absorbed: {absorbed}. " +
+            $"HP damage: {hpDamage}. " +
+            $"HP: {PlayerRuntimeManager.Instance.currentHp}/{maxHp}, " +
+            $"Shield: {shieldForCurrentTurn}"
+        );
     }
 
     public void ResetShieldAtEndTurn()

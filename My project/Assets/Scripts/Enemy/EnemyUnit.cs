@@ -21,6 +21,7 @@ public class EnemyUnit : MonoBehaviour
     [SerializeField] TMP_Text enemyTakeDamageText;
     [SerializeField] TMP_Text enemyText;
     [SerializeField] TMP_Text nextTurnText;
+    [SerializeField] private Transform floatingTextPoint;
     
     [Header("VFX and Audio")]
     [SerializeField] private GameObject particleEffect;
@@ -47,27 +48,54 @@ public class EnemyUnit : MonoBehaviour
     public int TakeDamage(int damage)
     {
         int damageLeft = damage;
+        int absorbed = 0;
+        
+        Vector3 textPosition = floatingTextPoint != null ? floatingTextPoint.position : transform.position;
 
         if (shieldForCurrentTurn > 0)
         {
-            int absorbed = Mathf.Min(shieldForCurrentTurn, damageLeft);
+            absorbed = Mathf.Min(shieldForCurrentTurn, damageLeft);
+
             shieldForCurrentTurn -= absorbed;
             damageLeft -= absorbed;
+
+            if (FloatingCombatTextManager.Instance != null)
+            {
+                FloatingCombatTextManager.Instance.SpawnShieldDamage(absorbed, textPosition);
+            }
         }
-        
+
         int before = currentHp;
-        
+
         if (damageLeft > 0)
         {
             currentHp -= damageLeft;
-            if(currentHp < 0)
+
+            if (currentHp < 0)
                 currentHp = 0;
         }
 
         int realDamage = before - currentHp;
 
+        if (realDamage > 0)
+        {
+            if (FloatingCombatTextManager.Instance != null)
+            {
+                FloatingCombatTextManager.Instance.SpawnHpDamage(realDamage, textPosition);
+            }
+
+            if (particleEffect != null)
+            {
+                Instantiate(particleEffect, transform.position, Quaternion.identity);
+            }
+        }
+
         enemyText.text = $"HP {currentHp} \n Shield {shieldForCurrentTurn}";
-        enemyTakeDamageText.text = $"[{enemyName}] got {realDamage} damage.";
+
+        if (enemyTakeDamageText != null)
+        {
+            enemyTakeDamageText.text = $"[{enemyName}] got {realDamage} damage.";
+        }
 
         if (currentHp <= 0)
             Die();

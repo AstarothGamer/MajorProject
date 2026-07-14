@@ -11640,6 +11640,7 @@ MonoBehaviour:
   enemyTakeDamageText: {fileID: 1104230251}
   enemyText: {fileID: 45253276}
   nextTurnText: {fileID: 1743235773}
+  floatingTextPoint: {fileID: 559853247}
   particleEffect: {fileID: 0}
   animator: {fileID: 250421860}
 --- !u!1 &254952470
@@ -12947,6 +12948,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 551659490}
   m_CullTransparentMesh: 1
+--- !u!1 &559853246
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 559853247}
+  m_Layer: 6
+  m_Name: Float text point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &559853247
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559853246}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.15039806, z: -0, w: 0.9886255}
+  m_LocalPosition: {x: 0, y: 2.496, z: 0}
+  m_LocalScale: {x: 0.11111112, y: 0.11111112, z: 0.11111112}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 964191856}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &566265689
 GameObject:
   m_ObjectHideFlags: 0
@@ -14659,6 +14691,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 94fd92b724085284ca1624b5dd946f4c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2116534193}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 94fd92b724085284ca1624b5dd946f4c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 559853247}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 94fd92b724085284ca1624b5dd946f4c, type: 3}
       insertIndex: -1
@@ -14702,7 +14737,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1044866627}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -0.52}
+  m_LocalPosition: {x: 0, y: 0, z: 0.09}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -20060,6 +20095,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1148064425}
   m_CullTransparentMesh: 1
+--- !u!1 &1226944128
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1226944129}
+  m_Layer: 6
+  m_Name: Float text point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1226944129
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1226944128}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.17, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1490887593}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1254124945
 GameObject:
   m_ObjectHideFlags: 0
@@ -20787,6 +20853,7 @@ MonoBehaviour:
   shield: {fileID: 963219315}
   energy: {fileID: 1319095572}
   particleEffect: {fileID: 0}
+  floatingTextPoint: {fileID: 1226944129}
   gameOver: {fileID: 2070404963}
 --- !u!4 &1490887593
 Transform:
@@ -20802,6 +20869,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1044866628}
+  - {fileID: 1226944129}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &1490887594
@@ -21759,6 +21827,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1693355128}
   m_CullTransparentMesh: 1
+--- !u!1 &1697699034
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1697699036}
+  - component: {fileID: 1697699035}
+  m_Layer: 0
+  m_Name: Floating text manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1697699035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1697699034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 620713f825030c2498e3b4d1f28909f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FloatingCombatTextManager
+  canvas: {fileID: 858128330}
+  canvasRect: {fileID: 858128331}
+  textPrefab: {fileID: 6073838521177311333, guid: d8ee57840c231b549b28ae7c417f5dc3, type: 3}
+  worldOffset: {x: 0, y: 0, z: 0}
+--- !u!4 &1697699036
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1697699034}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.55, y: 0.59858, z: 0.42089}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1705816206
 GameObject:
   m_ObjectHideFlags: 0
@@ -24002,3 +24118,4 @@ SceneRoots:
   - {fileID: 243323855}
   - {fileID: 1470277014}
   - {fileID: 440875161}
+  - {fileID: 1697699036}

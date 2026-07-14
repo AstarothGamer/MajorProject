@@ -919,6 +919,7 @@ Transform:
   - {fileID: 1272352249722037191}
   - {fileID: 2262636453441164502}
   - {fileID: 6918754383140168905}
+  - {fileID: 2471746624984232306}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &5422671679553721974
@@ -969,6 +970,7 @@ MonoBehaviour:
   enemyTakeDamageText: {fileID: 2841055201903565960}
   enemyText: {fileID: 7236106281039695888}
   nextTurnText: {fileID: 2374664401018290731}
+  floatingTextPoint: {fileID: 2471746624984232306}
   particleEffect: {fileID: 2514638380456538877, guid: 5b2be2297798fd141a49ec22b5aef800, type: 3}
   animator: {fileID: 5422671679553721974}
 --- !u!114 &9201001650046767782
@@ -1666,6 +1668,37 @@ Transform:
   m_Children:
   - {fileID: 4119779919949643815}
   m_Father: {fileID: 5713889788025496586}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7770980648121135126
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2471746624984232306}
+  m_Layer: 0
+  m_Name: Float text point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2471746624984232306
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7770980648121135126}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 10.86, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 754914215808500318}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7809194764722561462
 GameObject:
