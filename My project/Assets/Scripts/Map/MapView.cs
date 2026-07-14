@@ -46,10 +46,11 @@ public class MapView : MonoBehaviour
 
         BuildMap();
 
+        yield return null;
+
         Canvas.ForceUpdateCanvases();
 
-        if (scrollRect != null) 
-            scrollRect.verticalNormalizedPosition = 0f;
+        ScrollToPlayerPosition();
     }
 
     public void BuildMap()
@@ -235,6 +236,51 @@ public class MapView : MonoBehaviour
 
             connection.view.SetState(isAvailable, isTravelled);
         }
+    }
+    
+    private void ScrollToPlayerPosition()
+    {
+        if (scrollRect == null)
+            return;
+
+        if (mapContent == null)
+            return;
+
+        if (RunMapManager.Instance == null)
+            return;
+
+        int currentNodeId = RunMapManager.Instance.CurrentNodeId;
+        
+        if (currentNodeId < 0)
+        {
+            scrollRect.verticalNormalizedPosition = 0f;
+            return;
+        }
+
+        if (!nodeViews.TryGetValue(currentNodeId, out MapNodeView currentNodeView))
+        {
+            scrollRect.verticalNormalizedPosition = 0f;
+            return;
+        }
+
+        RectTransform viewport = scrollRect.viewport;
+
+        if (viewport == null)
+            viewport = scrollRect.GetComponent<RectTransform>();
+
+        float contentHeight = mapContent.rect.height;
+        float viewportHeight = viewport.rect.height;
+
+        float scrollableHeight = contentHeight - viewportHeight;
+
+        if (scrollableHeight <= 0f)
+            return;
+
+        float targetY = currentNodeView.RectTransform.anchoredPosition.y;
+
+        float normalizedPosition = Mathf.Clamp01((targetY - viewportHeight * 0.5f) / scrollableHeight);
+        
+        scrollRect.verticalNormalizedPosition = normalizedPosition;
     }
 
     private void ClearMap()
