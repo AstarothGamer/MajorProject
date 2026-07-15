@@ -848,11 +848,11 @@ MonoBehaviour:
   horizontalPadding: 150
   bottomPadding: 120
   topPadding: 180
-  enemyIcon: {fileID: 21300000, guid: 5a73a99a6e112c14dbc48ad774ec9efd, type: 3}
-  restIcon: {fileID: 21300000, guid: 4456b820211bf4549998b03b150c96fa, type: 3}
-  unknownIcon: {fileID: 21300000, guid: e7f9a8af30b4c774bb7c3cda70dd3b33, type: 3}
-  treasureIcon: {fileID: 21300000, guid: 319d41cd4a8346446958f9f492b5f491, type: 3}
-  bossIcon: {fileID: 21300000, guid: 5a73a99a6e112c14dbc48ad774ec9efd, type: 3}
+  enemyIcon: {fileID: 21300000, guid: 6ffd2a4747d9589439af4ef33b236a19, type: 3}
+  restIcon: {fileID: 21300000, guid: 89dce73615640784cb945eee4d742cd4, type: 3}
+  unknownIcon: {fileID: 21300000, guid: c6cafed9dc20b9f498a43f9508107ceb, type: 3}
+  treasureIcon: {fileID: 21300000, guid: 07520e0fd79d4d04eaa650f0e316e1f8, type: 3}
+  bossIcon: {fileID: 21300000, guid: ce67e2e7407a1964a9058591f03ffc77, type: 3}
 --- !u!1 &403353104
 GameObject:
   m_ObjectHideFlags: 0
