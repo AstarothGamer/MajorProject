@@ -11124,7 +11124,7 @@ GameObject:
   - component: {fileID: 1252820407}
   - component: {fileID: 1252820406}
   m_Layer: 5
-  m_Name: Player HP (Should be linked to the player's health bar)
+  m_Name: Player HP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
