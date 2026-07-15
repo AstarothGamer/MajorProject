@@ -7041,9 +7041,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DescriptionPanel
   root: {fileID: 1433191626}
-  titleText: {fileID: 1960169397}
   descriptionText: {fileID: 1703873372}
-  statText: {fileID: 1670389265}
 --- !u!1 &927510742
 GameObject:
   m_ObjectHideFlags: 0
@@ -7513,8 +7511,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4280883621
+  m_fontColor: {r: 0.64705884, g: 0.09803922, b: 0.16078432, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -7593,14 +7591,14 @@ RectTransform:
   m_GameObject: {fileID: 1047788910}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.4596, y: 1.4596, z: 1.4596}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1667729360}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -660, y: -2}
+  m_AnchoredPosition: {x: -660, y: -35}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1060078904
@@ -9653,7 +9651,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 324.4, y: -48.5}
+  m_AnchoredPosition: {x: 320.80005, y: -39.600037}
   m_SizeDelta: {x: 359.2, y: 328.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1683793942
