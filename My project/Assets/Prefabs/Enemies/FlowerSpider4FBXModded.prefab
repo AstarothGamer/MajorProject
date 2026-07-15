@@ -957,8 +957,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyUnit
   enemyName: 2
-  minHp: 15
-  maxHp: 20
+  minHp: 1
+  maxHp: 2
   currentHp: 0
   minDamage: 4
   maxDamage: 8
