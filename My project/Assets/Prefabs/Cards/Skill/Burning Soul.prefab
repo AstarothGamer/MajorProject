@@ -110,6 +110,7 @@ MonoBehaviour:
   cardName: 'Name: Burning Soul'
   description: 'Lose Health: Deal damage to self
 
+
     Energy: Need to play cards'
   cardType: 1
   attackTargetMode: 0
