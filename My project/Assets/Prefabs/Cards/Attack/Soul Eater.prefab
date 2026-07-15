@@ -388,7 +388,9 @@ MonoBehaviour:
   cardName: 'Name: Soul Eater'
   description: 'Lose Health: Deal damage to self
 
-    Attack: Deal damage to an enemy'
+
+    Attack: Deal damage to an
+    enemy'
   cardType: 0
   attackTargetMode: 1
   effects:
