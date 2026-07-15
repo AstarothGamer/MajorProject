@@ -12,17 +12,13 @@ public class MapNodeView : MonoBehaviour
     [SerializeField] private GameObject currentMarker;
 
     [Header("State Colors")]
-    [SerializeField] private Color lockedColor =
-        new Color(0.35f, 0.35f, 0.35f, 0.7f);
+    [SerializeField] private Color lockedColor = new Color(0.35f, 0.35f, 0.35f, 0.7f);
 
-    [SerializeField] private Color availableColor =
-        Color.white;
+    [SerializeField] private Color availableColor = Color.white;
 
-    [SerializeField] private Color visitedColor =
-        new Color(0.55f, 0.55f, 0.55f, 1f);
+    [SerializeField] private Color visitedColor = new Color(0.55f, 0.55f, 0.55f, 1f);
 
-    [SerializeField] private Color currentColor =
-        new Color(1f, 0.8f, 0.2f, 1f);
+    [SerializeField] private Color currentColor = new Color(1f, 0.8f, 0.2f, 1f);
 
     public int NodeId { get; private set; }
 

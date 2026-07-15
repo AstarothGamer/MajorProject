@@ -45,9 +45,7 @@ public class PlayerRuntimeManager : MonoBehaviour
     public void Heal(int amount)
     {
         currentHp += amount;
-        if (currentHp > maxHp)
-            currentHp = maxHp;
-
+        
         Debug.Log($"Player HP: {currentHp}/{maxHp}");
     }
 
@@ -55,5 +53,20 @@ public class PlayerRuntimeManager : MonoBehaviour
     {
         currentHp = maxHp;
         Debug.Log("Player stats reset");
+    }
+
+    public int HealedAmount(int value)
+    {
+        int amount = currentHp + value;
+        int totalHP = currentHp + value;
+        if (totalHP > maxHp)
+        {
+            amount = - totalHP + maxHp +  value;
+        }
+        else
+        {
+            amount = value;
+        }
+        return amount;
     }
 }

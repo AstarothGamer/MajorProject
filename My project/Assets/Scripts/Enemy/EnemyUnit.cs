@@ -61,7 +61,7 @@ public class EnemyUnit : MonoBehaviour
 
             if (FloatingCombatTextManager.Instance != null)
             {
-                FloatingCombatTextManager.Instance.SpawnShieldDamage(absorbed, textPosition);
+                FloatingCombatTextManager.Instance.SpawnShieldDamage(absorbed, textPosition + new Vector3(0f, -0.25f, 0f));
             }
         }
 

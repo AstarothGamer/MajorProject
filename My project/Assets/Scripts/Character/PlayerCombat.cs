@@ -67,10 +67,16 @@ public class PlayerCombat : MonoBehaviour
 
     public void Heal(int value)
     {
-        PlayerRuntimeManager.Instance.Heal(value);
+        int healedAmount = PlayerRuntimeManager.Instance.HealedAmount(value);
+        
+        PlayerRuntimeManager.Instance.Heal(healedAmount);
+        
+        Vector3 textPosition = floatingTextPoint != null ? floatingTextPoint.position : transform.position;
+
+        FloatingCombatTextManager.Instance.SpawnHeal(healedAmount, textPosition + new Vector3(0f, -0.25f, 0f));
         
         hp.text = $"HP: {PlayerRuntimeManager.Instance.currentHp}";
-        Debug.Log($"Player got {value} HP. HP: {PlayerRuntimeManager.Instance.currentHp}/{maxHp}");
+        Debug.Log($"Player got {healedAmount} HP. HP: {PlayerRuntimeManager.Instance.currentHp}/{maxHp}");
     }
 
     public void TakeDamage(int value)
@@ -92,7 +98,7 @@ public class PlayerCombat : MonoBehaviour
 
             if (FloatingCombatTextManager.Instance != null)
             {
-                FloatingCombatTextManager.Instance.SpawnShieldDamage(absorbed, textPosition);
+                FloatingCombatTextManager.Instance.SpawnShieldDamage(absorbed, textPosition + new Vector3(0f, -0.25f, 0f));
             }
         }
 

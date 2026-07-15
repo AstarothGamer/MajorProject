@@ -7412,8 +7412,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RunMapManager
   mapSceneName: Map
   enemySceneName: FightingScene
-  restSceneName: RestScene
-  unknownSceneName: MapScene
+  restSceneName: RestRoom
   treasureSceneName: TreasuresScene
   bossSceneName: TallManScene
 --- !u!114 &2090484973

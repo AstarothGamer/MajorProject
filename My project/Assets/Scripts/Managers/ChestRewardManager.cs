@@ -114,7 +114,7 @@ public class ChestRewardManager : MonoBehaviour
 
     public void ReturnToMap()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(1);
     }
 
     private List<Card> GetRandomCards(int count)

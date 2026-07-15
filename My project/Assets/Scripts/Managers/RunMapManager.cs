@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = System.Random;
 
 [RequireComponent(typeof(MapGenerator))]
 public class RunMapManager : MonoBehaviour
@@ -14,7 +15,6 @@ public class RunMapManager : MonoBehaviour
     [Header("Encounter Scenes Names")]
     [SerializeField] private string enemySceneName = "FightingScene";
     [SerializeField] private string restSceneName = "RestScene";
-    [SerializeField] private string unknownSceneName = "MapScene";
     [SerializeField] private string treasureSceneName = "TreasuresScene";
     [SerializeField] private string bossSceneName = "TallManScene";
     
@@ -133,7 +133,20 @@ public class RunMapManager : MonoBehaviour
                 break;
 
             case MapNodeType.Unknown:
-                targetScene = unknownSceneName;
+                int random = UnityEngine.Random.Range(0, 3);
+                
+                switch (random)
+                {
+                    case 0:
+                        targetScene = restSceneName;
+                        break;
+                    case 1:
+                        targetScene = treasureSceneName;
+                        break;
+                    case 2:
+                        targetScene = enemySceneName;
+                        break;
+                }
                 break;
 
             case MapNodeType.Treasure: 

@@ -26,6 +26,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/EndOfDemo.unity
     guid: 256805459de0ee647a4b98fd4d174d50
+  - enabled: 1
+    path: Assets/Scenes/RestRoom.unity
+    guid: 7df508b0d0e6bbf4b98da868934e2829
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
