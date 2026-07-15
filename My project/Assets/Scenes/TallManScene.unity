@@ -11641,7 +11641,7 @@ MonoBehaviour:
   enemyText: {fileID: 45253276}
   nextTurnText: {fileID: 1743235773}
   floatingTextPoint: {fileID: 559853247}
-  particleEffect: {fileID: 0}
+  particleEffect: {fileID: 2514638380456538877, guid: 5b2be2297798fd141a49ec22b5aef800, type: 3}
   animator: {fileID: 250421860}
 --- !u!1 &254952470
 GameObject:
@@ -12379,9 +12379,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DescriptionPanel
   root: {fileID: 946838264}
-  titleText: {fileID: 1693355130}
   descriptionText: {fileID: 1489204307}
-  statText: {fileID: 1855583502}
 --- !u!1 &440875159
 GameObject:
   m_ObjectHideFlags: 0
@@ -20852,7 +20850,7 @@ MonoBehaviour:
   hp: {fileID: 2089546310}
   shield: {fileID: 963219315}
   energy: {fileID: 1319095572}
-  particleEffect: {fileID: 0}
+  particleEffect: {fileID: 2514638380456538877, guid: 5b2be2297798fd141a49ec22b5aef800, type: 3}
   floatingTextPoint: {fileID: 1226944129}
   gameOver: {fileID: 2070404963}
 --- !u!4 &1490887593
