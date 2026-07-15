@@ -386,9 +386,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Card
   cardName: 'Name: Soul Eater'
-  description: 'Lose Health.
+  description: 'Lose Health: Deal damage to self
 
-    Deal Damage to enemy.'
+    Attack: Deal damage to an enemy'
   cardType: 0
   attackTargetMode: 1
   effects:

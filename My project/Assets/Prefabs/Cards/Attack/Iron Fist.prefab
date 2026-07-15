@@ -870,9 +870,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Card
   cardName: 'Name: Iron Fist'
-  description: 'Gain Shield
+  description: 'Block: Shield blocks damage
 
-    Deal Damage'
+
+    Attack: Deal damage to an enemy'
   cardType: 0
   attackTargetMode: 1
   effects:
