@@ -2072,6 +2072,8 @@ MonoBehaviour:
   enemyTakeDamageText: {fileID: 1756950012}
   enemyText: {fileID: 455119330}
   nextTurnText: {fileID: 2054212962}
+  floatingTextPoint: {fileID: 0}
+  particleEffect: {fileID: 0}
   animator: {fileID: 0}
 --- !u!4 &429666035
 Transform:
@@ -8535,6 +8537,8 @@ MonoBehaviour:
   enemyTakeDamageText: {fileID: 510428935}
   enemyText: {fileID: 105309728}
   nextTurnText: {fileID: 979901102}
+  floatingTextPoint: {fileID: 0}
+  particleEffect: {fileID: 0}
   animator: {fileID: 0}
 --- !u!65 &627454415
 BoxCollider:
@@ -20249,6 +20253,8 @@ MonoBehaviour:
   hp: {fileID: 2015700741}
   shield: {fileID: 1674270533}
   energy: {fileID: 572239160}
+  particleEffect: {fileID: 0}
+  floatingTextPoint: {fileID: 0}
   gameOver: {fileID: 0}
 --- !u!1 &1212299392
 GameObject:
