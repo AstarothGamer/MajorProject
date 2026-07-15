@@ -7,6 +7,7 @@ public class VictoryManager : MonoBehaviour
     public static VictoryManager Instance;
 
     [SerializeField] private GameObject victoryPanel;
+    [SerializeField] private int sceneIndex = 1;
 
     private void Awake()
     {
@@ -58,6 +59,6 @@ public class VictoryManager : MonoBehaviour
 
     public void GoToMap()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(sceneIndex);
     }
 }

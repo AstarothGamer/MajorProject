@@ -23754,6 +23754,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VictoryManager
   victoryPanel: {fileID: 2134875376}
+  sceneIndex: 5
 --- !u!114 &2070404965
 MonoBehaviour:
   m_ObjectHideFlags: 0
