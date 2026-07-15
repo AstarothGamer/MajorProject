@@ -6,9 +6,9 @@ public class DescriptionPanel : MonoBehaviour
     public static DescriptionPanel Instance;
 
     public GameObject root;
-    public TextMeshProUGUI titleText;
+   // public TextMeshProUGUI titleText;
     public TextMeshProUGUI descriptionText;
-    public TextMeshProUGUI statText;
+    //public TextMeshProUGUI statText;
 
     private void Awake()
     {
@@ -20,9 +20,9 @@ public class DescriptionPanel : MonoBehaviour
     {
         root.SetActive(true);
 
-        titleText.text = title;
+        //titleText.text = title;
         descriptionText.text = description;
-        statText.text = stats;
+        //statText.text = stats;
 
         root.transform.position = position + new Vector2(0f, 300f);
     }
