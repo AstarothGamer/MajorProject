@@ -70,11 +70,11 @@ public class WheelOfFortune : MonoBehaviour
 
     private void HideWheel()
     {
-        if (turnManager != null)
-            turnManager.EndAction();
-        
-        wheel.SetActive(false);
-        wheelHolder.SetActive(false);
+        if (wheel != null)
+            wheel.SetActive(false);
+
+        if (wheelHolder != null)
+            wheelHolder.SetActive(false);
     }
     
     private IEnumerator HideAfterDelay()
@@ -199,11 +199,26 @@ public class WheelOfFortune : MonoBehaviour
     public void Spin()
     {
         if (IsSpinning) return;
+
+        StartCoroutine(SpinAndWait(null));
+    }
     
-        ShowWheel();
-        
+    public IEnumerator SpinAndWait(System.Action<int> onFinished)
+    {
+        if (IsSpinning)
+            yield break;
+
+        if (segmentCount < 2)
+            yield break;
+
         int visualSegmentIndex = PickWeightedIndex();
-        StartCoroutine(SpinToIndexRoutine(visualSegmentIndex));
+
+        yield return StartCoroutine(
+            SpinToVisualIndexAndWait(
+                visualSegmentIndex,
+                onFinished
+            )
+        );
     }
     
     public void SpinToIndex(int visualSegmentIndex)
@@ -211,34 +226,50 @@ public class WheelOfFortune : MonoBehaviour
         if (IsSpinning) return;
         if (segmentCount < 2) return;
 
-        visualSegmentIndex = Mathf.Clamp(visualSegmentIndex, 0, segmentCount - 1);
-        StartCoroutine(SpinToIndexRoutine(visualSegmentIndex));
-    }
+        visualSegmentIndex = Mathf.Clamp(
+            visualSegmentIndex,
+            0,
+            segmentCount - 1
+        );
 
-    private IEnumerator SpinToIndexRoutine(int visualSegmentIndex)
+        StartCoroutine(
+            SpinToVisualIndexAndWait(
+                visualSegmentIndex,
+                null
+            )
+        );
+    }
+    
+    private IEnumerator SpinToVisualIndexAndWait(int visualSegmentIndex, System.Action<int> onFinished)
     {
+        ShowWheel();
+
         IsSpinning = true;
-        
+
         float sliceAngle = 360f / segmentCount;
-        
+
         float centerAngleClockwise = visualSegmentIndex * sliceAngle + sliceAngle * 0.5f;
 
         float startZ = wheelRoot.eulerAngles.z;
-        
+
         float targetZModulo = centerAngleClockwise;
 
         float deltaForward = Repeat360(targetZModulo - startZ);
 
         int turns = Random.Range(minFullTurns, maxFullTurns + 1);
+
         float endZ = startZ + turns * 360f + deltaForward;
 
         float duration = Random.Range(spinDurationMin, spinDurationMax);
+
         float t = 0f;
 
         while (t < 1f)
         {
             t += Time.deltaTime / Mathf.Max(0.001f, duration);
+
             float k = ease.Evaluate(Mathf.Clamp01(t));
+
             float z = Mathf.LerpUnclamped(startZ, endZ, k);
 
             wheelRoot.rotation = Quaternion.Euler(0, 0, z);
@@ -251,9 +282,55 @@ public class WheelOfFortune : MonoBehaviour
         IsSpinning = false;
 
         int effectIndex = segmentValueIndices[visualSegmentIndex];
+
+        onFinished?.Invoke(effectIndex);
+
         OnSpinFinished?.Invoke(effectIndex);
-        StartCoroutine(HideAfterDelay());
+
+        yield return new WaitForSeconds(secondsTillHideWheel);
+
+        HideWheel();
     }
+
+    // private IEnumerator SpinToIndexRoutine(int visualSegmentIndex)
+    // {
+    //     IsSpinning = true;
+    //     
+    //     float sliceAngle = 360f / segmentCount;
+    //     
+    //     float centerAngleClockwise = visualSegmentIndex * sliceAngle + sliceAngle * 0.5f;
+    //
+    //     float startZ = wheelRoot.eulerAngles.z;
+    //     
+    //     float targetZModulo = centerAngleClockwise;
+    //
+    //     float deltaForward = Repeat360(targetZModulo - startZ);
+    //
+    //     int turns = Random.Range(minFullTurns, maxFullTurns + 1);
+    //     float endZ = startZ + turns * 360f + deltaForward;
+    //
+    //     float duration = Random.Range(spinDurationMin, spinDurationMax);
+    //     float t = 0f;
+    //
+    //     while (t < 1f)
+    //     {
+    //         t += Time.deltaTime / Mathf.Max(0.001f, duration);
+    //         float k = ease.Evaluate(Mathf.Clamp01(t));
+    //         float z = Mathf.LerpUnclamped(startZ, endZ, k);
+    //
+    //         wheelRoot.rotation = Quaternion.Euler(0, 0, z);
+    //
+    //         yield return null;
+    //     }
+    //
+    //     wheelRoot.rotation = Quaternion.Euler(0, 0, endZ);
+    //
+    //     IsSpinning = false;
+    //
+    //     int effectIndex = segmentValueIndices[visualSegmentIndex];
+    //     OnSpinFinished?.Invoke(effectIndex);
+    //     StartCoroutine(HideAfterDelay());
+    // }
 
     private int PickWeightedIndex()
     {

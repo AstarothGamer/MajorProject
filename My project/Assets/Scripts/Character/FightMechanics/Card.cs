@@ -103,8 +103,8 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     private OutlineOnPoint outline;
     private LayerMask layerMask;
     
-    private int lastWheelIndex = 0;
-    private bool wheelFinished = false;
+    // private int lastWheelIndex = 0;
+    // private bool wheelFinished = false;
 
     #region Unity Functions
 
@@ -134,23 +134,17 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         if (rootCanvas == null)
             rootCanvas = GetComponentInParent<Canvas>();
         
-        if (wheel != null)
-        {
-            wheel.OnSpinFinished.AddListener(OnWheelFinished);
-        }
+        // if (wheel != null)
+        // {
+        //     wheel.OnSpinFinished.AddListener(OnWheelFinished);
+        // }
     }
     
     private void Update()
     {
         if (isDragging)
         {
-            rectTransform.position =
-                Vector3.SmoothDamp(
-                    rectTransform.position,
-                    dragTargetPosition,
-                    ref dragVelocity,
-                    dragFollowSmoothTime
-                );
+            rectTransform.position = Vector3.SmoothDamp(rectTransform.position, dragTargetPosition, ref dragVelocity, dragFollowSmoothTime);
 
             return;
         }
@@ -239,19 +233,19 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     }
     
     
-    private void OnWheelFinished(int index)
-    {
-        lastWheelIndex = index;
-        wheelFinished = true;
-    }
+    // private void OnWheelFinished(int index)
+    // {
+    //     lastWheelIndex = index;
+    //     wheelFinished = true;
+    // }
     
-    private void OnDestroy()
-    {
-        if (wheel != null)
-        {
-            wheel.OnSpinFinished.RemoveListener(OnWheelFinished);
-        }
-    }
+    // private void OnDestroy()
+    // {
+    //     if (wheel != null)
+    //     {
+    //         wheel.OnSpinFinished.RemoveListener(OnWheelFinished);
+    //     }
+    // }
     
     
 
@@ -596,23 +590,51 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     {
         if (turnManager != null)
             turnManager.StartAction();
-        
-        if (wheel == null)
-        {
-            Debug.LogWarning($"Card [{cardName}] cannot be played: WheelOfFortune not found.");
-            yield break;
-        }
 
         playerCombat.SpendEnergy(effects.energyCost);
 
-        wheelFinished = false;
+        int wheelIndex = 0;
 
-        wheel.Spin();
+        if (turnManager != null && turnManager.UseTurnWheelForCards)
+        {
+            wheelIndex = turnManager.CurrentTurnWheelIndex;
 
-        while (!wheelFinished)
-            yield return null;
+            Debug.Log($"Card [{cardName}] uses turn wheel result: {wheelIndex}");
+        }
+        else
+        {
+            if (wheel == null)
+            {
+                Debug.LogWarning($"Card [{cardName}] cannot be played: WheelOfFortune not found.");
 
-        ApplyEffectsByIndex(lastWheelIndex, enemies);
+                if (turnManager != null)
+                    turnManager.EndAction();
+
+                ReturnToHand();
+
+                yield break;
+            }
+
+            bool wheelResultReceived = false;
+
+            yield return StartCoroutine(
+                wheel.SpinAndWait(index => { wheelIndex = index; wheelResultReceived = true; })
+            );
+
+            if (!wheelResultReceived)
+            {
+                Debug.LogWarning($"Card [{cardName}] did not receive wheel result.");
+
+                if (turnManager != null)
+                    turnManager.EndAction();
+
+                ReturnToHand();
+
+                yield break;
+            }
+        }
+
+        ApplyEffectsByIndex(wheelIndex, enemies);
     }
     
     private void ApplyEffectsByIndex(int wheelIndex, List<EnemyUnit> enemies)
@@ -697,11 +719,9 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     {
         Debug.Log($"Card [{cardName}] has been played.");
 
-        
-        // Add VFX and SFX
-        // discarding cards 
-        // and etc
-        
+        if (turnManager != null)
+            turnManager.EndAction();
+
         if (deckManager != null)
         {
             deckManager.OnCardPlayed(this);
