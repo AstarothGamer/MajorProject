@@ -733,7 +733,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Card
   cardName: 'Name: Attack'
-  description: 'Attack: Deal damage to an enemy'
+  description: Deal damage to an enemy
   cardType: 0
   attackTargetMode: 1
   effects:

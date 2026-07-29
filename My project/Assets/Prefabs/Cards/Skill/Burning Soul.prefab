@@ -108,10 +108,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Card
   cardName: 'Name: Burning Soul'
-  description: 'Lose Health: Deal damage to self
+  description: 'Deal damage to self
 
 
-    Energy: Need to play cards'
+    Energy: Needed to play cards'
   cardType: 1
   attackTargetMode: 0
   effects:
