@@ -11764,14 +11764,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyUnit
   enemyName: 1
-  minHp: 35
-  maxHp: 40
+  minHp: 70
+  maxHp: 80
   currentHp: 0
-  minDamage: 10
-  maxDamage: 15
+  minDamage: 20
+  maxDamage: 30
   currentDamage: 0
-  minShield: 7
-  maxShield: 10
+  minShield: 15
+  maxShield: 25
   currentShield: 0
   shieldForCurrentTurn: 0
   enemyTakeDamageText: {fileID: 1104230251}
@@ -11779,6 +11779,7 @@ MonoBehaviour:
   nextTurnText: {fileID: 1743235773}
   floatingTextPoint: {fileID: 559853247}
   particleEffect: {fileID: 2514638380456538877, guid: 5b2be2297798fd141a49ec22b5aef800, type: 3}
+  healthBar: {fileID: 0}
   animator: {fileID: 250421860}
 --- !u!1 &254952470
 GameObject:
@@ -21128,6 +21129,7 @@ MonoBehaviour:
   energy: {fileID: 1319095572}
   particleEffect: {fileID: 2514638380456538877, guid: 5b2be2297798fd141a49ec22b5aef800, type: 3}
   floatingTextPoint: {fileID: 1226944129}
+  healthBar: {fileID: 0}
   gameOver: {fileID: 2070404963}
 --- !u!4 &1490887593
 Transform:
