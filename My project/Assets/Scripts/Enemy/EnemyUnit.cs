@@ -17,6 +17,8 @@ public class EnemyUnit : MonoBehaviour
     public int currentShield;
     public int shieldForCurrentTurn;
 
+    private int generatedMaxHp;
+
     [Header("Texts")] 
     [SerializeField] TMP_Text enemyTakeDamageText;
     [SerializeField] TMP_Text enemyText;
@@ -25,6 +27,7 @@ public class EnemyUnit : MonoBehaviour
     
     [Header("VFX and Audio")]
     [SerializeField] private GameObject particleEffect;
+    [SerializeField] private HealthBarUI healthBar;
 
     // [Header("Optional Multi Target Setup")]
     // public List<EnemyUnit> additionalTargets = new List<EnemyUnit>();
@@ -36,8 +39,15 @@ public class EnemyUnit : MonoBehaviour
 
     void Awake()
     {
-        currentHp = Random.Range(minHp, maxHp + 1);
+        generatedMaxHp = Random.Range(minHp, maxHp + 1);
+        currentHp = generatedMaxHp;
+        
         enemyText.text = $"HP {currentHp} \n Shield {shieldForCurrentTurn}";
+        
+        if (healthBar != null)
+        {
+            healthBar.SetValueInstant(currentHp, generatedMaxHp);
+        }
     }
 
     void Start()
@@ -95,6 +105,11 @@ public class EnemyUnit : MonoBehaviour
         if (enemyTakeDamageText != null)
         {
             enemyTakeDamageText.text = $"[{enemyName}] got {realDamage} damage.";
+        }
+        
+        if (healthBar != null)
+        {
+            healthBar.SetValue(currentHp, generatedMaxHp);
         }
 
         if (currentHp <= 0)

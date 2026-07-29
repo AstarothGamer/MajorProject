@@ -22,6 +22,7 @@ public class PlayerCombat : MonoBehaviour
     [Header("VFX and Audio")]
     [SerializeField] private GameObject particleEffect;
     [SerializeField] private Transform floatingTextPoint;
+    [SerializeField] private HealthBarUI healthBar;
     
     [SerializeField] GameOver gameOver;
 
@@ -36,6 +37,11 @@ public class PlayerCombat : MonoBehaviour
         hp.text = $"HP: {PlayerRuntimeManager.Instance.currentHp}";
         shield.text = $"Shield: {shieldForCurrentTurn}";
         energy.text = $"Energy: {currentEnergy}";
+
+        if (healthBar != null)
+        {
+            healthBar.SetValueInstant(PlayerRuntimeManager.Instance.currentHp, PlayerRuntimeManager.Instance.MaxHp);
+        }
     }
     
     public void SpendEnergy(int value)
@@ -75,6 +81,11 @@ public class PlayerCombat : MonoBehaviour
 
         FloatingCombatTextManager.Instance.SpawnHeal(healedAmount, textPosition + new Vector3(0f, -0.25f, 0f));
         
+        if (healthBar != null)
+        {
+            healthBar.SetValue(PlayerRuntimeManager.Instance.currentHp, PlayerRuntimeManager.Instance.MaxHp);
+        }
+        
         hp.text = $"HP: {PlayerRuntimeManager.Instance.currentHp}";
         Debug.Log($"Player got {healedAmount} HP. HP: {PlayerRuntimeManager.Instance.currentHp}/{maxHp}");
     }
@@ -109,6 +120,7 @@ public class PlayerCombat : MonoBehaviour
             PlayerRuntimeManager.Instance.TakeDamage(hpDamage);
 
             hp.text = $"HP: {PlayerRuntimeManager.Instance.currentHp}";
+            
 
             if (FloatingCombatTextManager.Instance != null)
             {
@@ -118,6 +130,11 @@ public class PlayerCombat : MonoBehaviour
             if (particleEffect != null)
             {
                 Instantiate(particleEffect, transform.position, Quaternion.identity);
+            }
+            
+            if (healthBar != null)
+            {
+                healthBar.SetValue(PlayerRuntimeManager.Instance.currentHp, PlayerRuntimeManager.Instance.MaxHp);
             }
         }
 
