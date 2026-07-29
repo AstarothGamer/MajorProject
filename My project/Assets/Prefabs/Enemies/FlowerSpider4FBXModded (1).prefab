@@ -1156,14 +1156,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyUnit
   enemyName: 1
-  minHp: 15
-  maxHp: 20
+  minHp: 20
+  maxHp: 25
   currentHp: 0
-  minDamage: 4
-  maxDamage: 8
+  minDamage: 6
+  maxDamage: 12
   currentDamage: 0
-  minShield: 5
-  maxShield: 7
+  minShield: 7
+  maxShield: 10
   currentShield: 0
   shieldForCurrentTurn: 0
   enemyTakeDamageText: {fileID: 2772316282570546508}
