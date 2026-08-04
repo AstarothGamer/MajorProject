@@ -972,6 +972,7 @@ MonoBehaviour:
   nextTurnText: {fileID: 2374664401018290731}
   floatingTextPoint: {fileID: 2471746624984232306}
   particleEffect: {fileID: 2514638380456538877, guid: 5b2be2297798fd141a49ec22b5aef800, type: 3}
+  healthBar: {fileID: 0}
   animator: {fileID: 5422671679553721974}
 --- !u!114 &9201001650046767782
 MonoBehaviour:
