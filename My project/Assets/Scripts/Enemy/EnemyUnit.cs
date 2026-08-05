@@ -21,7 +21,8 @@ public class EnemyUnit : MonoBehaviour
 
     [Header("Texts")] 
     [SerializeField] TMP_Text enemyTakeDamageText;
-    [SerializeField] TMP_Text enemyText;
+    [SerializeField] TMP_Text enemyHP;
+    [SerializeField] TMP_Text enemyShield;
     [SerializeField] TMP_Text nextTurnText;
     [SerializeField] private Transform floatingTextPoint;
     
@@ -43,7 +44,8 @@ public class EnemyUnit : MonoBehaviour
         generatedMaxHp = Random.Range(minHp, maxHp + 1);
         currentHp = generatedMaxHp;
         
-        enemyText.text = $"HP {currentHp} \n Shield {shieldForCurrentTurn}";
+        enemyHP.text = $"HP {currentHp}";
+        enemyShield.text = $"Shield {shieldForCurrentTurn}";
         
         if (healthBar != null)
         {
@@ -107,7 +109,8 @@ public class EnemyUnit : MonoBehaviour
             }
         }
 
-        enemyText.text = $"HP {currentHp} \n Shield {shieldForCurrentTurn}";
+        enemyHP.text = $"HP {currentHp}";
+        enemyShield.text = $"Shield {shieldForCurrentTurn}";
 
         if (enemyTakeDamageText != null)
         {
@@ -147,7 +150,8 @@ public class EnemyUnit : MonoBehaviour
             TakeShield(currentShield);
         }
 
-        enemyText.text = $"HP {currentHp} \n Shield {shieldForCurrentTurn}";
+        enemyHP.text = $"HP {currentHp}";
+        enemyShield.text = $"Shield {shieldForCurrentTurn}";
     }
 
     public void TakeShield(int amount)
