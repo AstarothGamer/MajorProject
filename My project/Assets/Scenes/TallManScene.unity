@@ -20676,12 +20676,12 @@ MonoBehaviour:
   maxEnergy: 3
   currentEnergy: 3
   shieldForCurrentTurn: 0
-  hp: {fileID: 0}
-  shield: {fileID: 0}
-  energy: {fileID: 0}
+  hp: {fileID: 1464756206}
+  shield: {fileID: 1065159745}
+  energy: {fileID: 2008696030}
   particleEffect: {fileID: 2514638380456538877, guid: 5b2be2297798fd141a49ec22b5aef800, type: 3}
   floatingTextPoint: {fileID: 1226944129}
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 543249998}
   damageShake: {fileID: 0}
   gameOver: {fileID: 2070404963}
 --- !u!4 &1490887593
