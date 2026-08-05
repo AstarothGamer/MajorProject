@@ -38,9 +38,12 @@ public class PlayerCombat : MonoBehaviour
     void Start()
     {
         ResetEnergy();
-        hp.text = $"HP: {PlayerRuntimeManager.Instance.currentHp}";
-        shield.text = $"Shield: {shieldForCurrentTurn}";
-        energy.text = $"Energy: {currentEnergy}";
+        if(hp != null)
+            hp.text = $"HP: {PlayerRuntimeManager.Instance.currentHp}";
+        if(shield != null)
+            shield.text = $"Shield: {shieldForCurrentTurn}";
+        if(energy != null)
+            energy.text = $"Energy: {currentEnergy}";
 
         if (healthBar != null)
         {
@@ -53,8 +56,9 @@ public class PlayerCombat : MonoBehaviour
         currentEnergy -= value;
         if (currentEnergy < 0)
             currentEnergy = 0;
-
-        energy.text = $"Energy: {currentEnergy}";
+    
+        if(energy != null) 
+            energy.text = $"Energy: {currentEnergy}";
         Debug.Log($"Player spent {value} energy. current energy: {currentEnergy}/{maxEnergy}");
     }
 
@@ -62,14 +66,17 @@ public class PlayerCombat : MonoBehaviour
     {
         currentEnergy += value;
 
-        energy.text = $"Energy: {currentEnergy}";
+        if(energy != null)
+            energy.text = $"Energy: {currentEnergy}";
         Debug.Log($"Player got {value} energy. current energy: {currentEnergy}/{maxEnergy}");
     }
 
     public void AddShieldForOneTurn(int value)
     {
         shieldForCurrentTurn += value;
-        shield.text = $"Shield: {shieldForCurrentTurn}";
+        
+        if(shield != null)
+            shield.text = $"Shield: {shieldForCurrentTurn}";
         Debug.Log($"Player got {value} shield for this turn. Shield: {shieldForCurrentTurn}");
     }
 
@@ -88,7 +95,8 @@ public class PlayerCombat : MonoBehaviour
             healthBar.SetValue(PlayerRuntimeManager.Instance.currentHp, PlayerRuntimeManager.Instance.MaxHp);
         }
         
-        hp.text = $"HP: {PlayerRuntimeManager.Instance.currentHp}";
+        if(hp != null)
+            hp.text = $"HP: {PlayerRuntimeManager.Instance.currentHp}";
         Debug.Log($"Player got {healedAmount} HP. HP: {PlayerRuntimeManager.Instance.currentHp}/{maxHp}");
     }
 
@@ -107,7 +115,8 @@ public class PlayerCombat : MonoBehaviour
             shieldForCurrentTurn -= absorbed;
             damageLeft -= absorbed;
 
-            shield.text = $"Shield: {shieldForCurrentTurn}";
+            if(shield != null)
+                shield.text = $"Shield: {shieldForCurrentTurn}";
 
             if (FloatingCombatTextManager.Instance != null)
             {
@@ -121,7 +130,8 @@ public class PlayerCombat : MonoBehaviour
 
             PlayerRuntimeManager.Instance.TakeDamage(hpDamage);
 
-            hp.text = $"HP: {PlayerRuntimeManager.Instance.currentHp}";
+            if(hp != null)
+                hp.text = $"HP: {PlayerRuntimeManager.Instance.currentHp}";
             
             if (damageShake != null)
                 damageShake.Shake();
@@ -154,14 +164,16 @@ public class PlayerCombat : MonoBehaviour
     public void ResetShieldAtEndTurn()
     {
         shieldForCurrentTurn = 0;
-        shield.text = $"Shield: {shieldForCurrentTurn}";
+        if(shield != null)
+            shield.text = $"Shield: {shieldForCurrentTurn}";
         Debug.Log("player's shield reset.");
     }
     
     public void ResetEnergy()
     {
         currentEnergy = maxEnergy;
-        energy.text = $"Energy: {currentEnergy}";
+        if(energy != null)
+            energy.text = $"Energy: {currentEnergy}";
         Debug.Log($"Energy reset: {currentEnergy}/{maxEnergy}");
     }
 }

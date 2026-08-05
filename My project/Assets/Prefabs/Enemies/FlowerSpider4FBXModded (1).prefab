@@ -1247,7 +1247,7 @@ MonoBehaviour:
   nextTurnText: {fileID: 1444839916089248548}
   floatingTextPoint: {fileID: 0}
   particleEffect: {fileID: 2514638380456538877, guid: 5b2be2297798fd141a49ec22b5aef800, type: 3}
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 4414115153888713209}
   damageShake: {fileID: 0}
   animator: {fileID: 8152894794389327989}
 --- !u!114 &5764262323526979896
