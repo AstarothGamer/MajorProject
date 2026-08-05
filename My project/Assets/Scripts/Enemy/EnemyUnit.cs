@@ -28,6 +28,7 @@ public class EnemyUnit : MonoBehaviour
     [Header("VFX and Audio")]
     [SerializeField] private GameObject particleEffect;
     [SerializeField] private HealthBarUI healthBar;
+    [SerializeField] private DamageShake damageShake;
 
     // [Header("Optional Multi Target Setup")]
     // public List<EnemyUnit> additionalTargets = new List<EnemyUnit>();
@@ -48,6 +49,9 @@ public class EnemyUnit : MonoBehaviour
         {
             healthBar.SetValueInstant(currentHp, generatedMaxHp);
         }
+        
+        if (damageShake == null)
+            damageShake = GetComponentInChildren<DamageShake>();
     }
 
     void Start()
@@ -93,6 +97,9 @@ public class EnemyUnit : MonoBehaviour
             {
                 FloatingCombatTextManager.Instance.SpawnHpDamage(realDamage, textPosition);
             }
+            
+            if (damageShake != null)
+                damageShake.Shake();
 
             if (particleEffect != null)
             {

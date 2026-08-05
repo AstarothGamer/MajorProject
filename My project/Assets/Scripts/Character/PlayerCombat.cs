@@ -23,12 +23,16 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private GameObject particleEffect;
     [SerializeField] private Transform floatingTextPoint;
     [SerializeField] private HealthBarUI healthBar;
+    [SerializeField] private DamageShake damageShake;
     
     [SerializeField] GameOver gameOver;
 
     void Awake()
     {
         gameOver = FindFirstObjectByType<GameOver>();
+        
+        if (damageShake == null)
+            damageShake = GetComponentInChildren<DamageShake>();
     }
 
     void Start()
@@ -119,6 +123,8 @@ public class PlayerCombat : MonoBehaviour
 
             hp.text = $"HP: {PlayerRuntimeManager.Instance.currentHp}";
             
+            if (damageShake != null)
+                damageShake.Shake();
 
             if (FloatingCombatTextManager.Instance != null)
             {

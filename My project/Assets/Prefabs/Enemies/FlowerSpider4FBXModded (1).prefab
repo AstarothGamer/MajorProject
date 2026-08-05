@@ -1094,6 +1094,7 @@ GameObject:
   - component: {fileID: 8152894794389327989}
   - component: {fileID: 4447913955166831525}
   - component: {fileID: 5764262323526979896}
+  - component: {fileID: 4934980849889602784}
   - component: {fileID: 1583551181249260441}
   m_Layer: 0
   m_Name: FlowerSpider4FBXModded (1)
@@ -1172,6 +1173,7 @@ MonoBehaviour:
   floatingTextPoint: {fileID: 0}
   particleEffect: {fileID: 2514638380456538877, guid: 5b2be2297798fd141a49ec22b5aef800, type: 3}
   healthBar: {fileID: 0}
+  damageShake: {fileID: 0}
   animator: {fileID: 8152894794389327989}
 --- !u!114 &5764262323526979896
 MonoBehaviour:
@@ -1188,6 +1190,22 @@ MonoBehaviour:
   targetRenderer: {fileID: 0}
   material: {fileID: 0}
   index: 1
+--- !u!114 &4934980849889602784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4456562937234513625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f374775537136244971d3d8a28a828b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DamageShake
+  target: {fileID: 6916691264607389909}
+  duration: 0.25
+  strength: 0.6
+  vibrations: 12
 --- !u!65 &1583551181249260441
 BoxCollider:
   m_ObjectHideFlags: 0
