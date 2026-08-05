@@ -14949,9 +14949,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -433406251500352439, guid: 94fd92b724085284ca1624b5dd946f4c, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -433406251500352439, guid: 94fd92b724085284ca1624b5dd946f4c, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 10d3359f8c0015845ac0ecee64d4e6ca, type: 2}
+    - target: {fileID: -433406251500352439, guid: 94fd92b724085284ca1624b5dd946f4c, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d98437a0550b15942963ee99518ec071, type: 2}
     - target: {fileID: 919132149155446097, guid: 94fd92b724085284ca1624b5dd946f4c, type: 3}
       propertyPath: m_Name
       value: SlenderM2F
@@ -14975,12 +14983,30 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 94fd92b724085284ca1624b5dd946f4c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 250421863}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 94fd92b724085284ca1624b5dd946f4c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 964191857}
   m_SourcePrefab: {fileID: 100100000, guid: 94fd92b724085284ca1624b5dd946f4c, type: 3}
 --- !u!4 &964191856 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 94fd92b724085284ca1624b5dd946f4c, type: 3}
   m_PrefabInstance: {fileID: 964191855}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &964191857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 250421859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e0509f46c4d7a441831c4e870d5e8be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutlineOnPoint
+  targetRenderer: {fileID: 0}
+  material: {fileID: 0}
+  index: 1
 --- !u!1 &1044866627
 GameObject:
   m_ObjectHideFlags: 0
@@ -21101,6 +21127,7 @@ GameObject:
   - component: {fileID: 1490887595}
   - component: {fileID: 1490887594}
   - component: {fileID: 1490887592}
+  - component: {fileID: 1490887597}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -21197,6 +21224,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: d98437a0550b15942963ee99518ec071, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -21228,6 +21256,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1490887591}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1490887597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490887591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e0509f46c4d7a441831c4e870d5e8be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutlineOnPoint
+  targetRenderer: {fileID: 0}
+  material: {fileID: 0}
+  index: 1
 --- !u!1 &1499372798
 GameObject:
   m_ObjectHideFlags: 0

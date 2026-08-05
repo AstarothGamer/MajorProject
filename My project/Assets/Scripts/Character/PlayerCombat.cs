@@ -57,8 +57,6 @@ public class PlayerCombat : MonoBehaviour
     public void GainEnergy(int value)
     {
         currentEnergy += value;
-        if (currentEnergy > maxEnergy)
-            currentEnergy = maxEnergy;
 
         energy.text = $"Energy: {currentEnergy}";
         Debug.Log($"Player got {value} energy. current energy: {currentEnergy}/{maxEnergy}");
