@@ -45,7 +45,7 @@ public class EnemyUnit : MonoBehaviour
         currentHp = generatedMaxHp;
         
         enemyHP.text = $"HP {currentHp}";
-        enemyShield.text = $"Shield {shieldForCurrentTurn}";
+        enemyShield.text = $"Shield: {shieldForCurrentTurn}";
         
         if (healthBar != null)
         {
