@@ -1112,7 +1112,7 @@ MonoBehaviour:
   scrollRect: {fileID: 1766024638}
   nodePrefab: {fileID: 972188807110261239, guid: ece8e90285d17a44ba0c872907274884, type: 3}
   connectionPrefab: {fileID: 9064397962106022877, guid: d75c0f02107104a4b84d0fa9e6a1f7db, type: 3}
-  columnSpacing: 150
+  columnSpacing: 170
   rowSpacing: 250
   horizontalPadding: 150
   bottomPadding: 120
