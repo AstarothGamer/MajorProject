@@ -116,7 +116,7 @@ public class PlayerCombat : MonoBehaviour
             damageLeft -= absorbed;
 
             if(shield != null)
-                shield.text = $"Shield: {shieldForCurrentTurn}";
+                shield.text = $"{shieldForCurrentTurn}";
 
             if (FloatingCombatTextManager.Instance != null)
             {
@@ -165,7 +165,7 @@ public class PlayerCombat : MonoBehaviour
     {
         shieldForCurrentTurn = 0;
         if(shield != null)
-            shield.text = $"Shield: {shieldForCurrentTurn}";
+            shield.text = $"{shieldForCurrentTurn}";
         Debug.Log("player's shield reset.");
     }
     

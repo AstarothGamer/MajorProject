@@ -45,7 +45,7 @@ public class EnemyUnit : MonoBehaviour
         currentHp = generatedMaxHp;
         
         enemyHP.text = $"HP {currentHp}";
-        enemyShield.text = $"Shield: {shieldForCurrentTurn}";
+        enemyShield.text = $"{shieldForCurrentTurn}";
         
         if (healthBar != null)
         {
@@ -110,7 +110,7 @@ public class EnemyUnit : MonoBehaviour
         }
 
         enemyHP.text = $"HP {currentHp}";
-        enemyShield.text = $"Shield {shieldForCurrentTurn}";
+        enemyShield.text = $"{shieldForCurrentTurn}";
 
         if (enemyTakeDamageText != null)
         {
@@ -151,7 +151,7 @@ public class EnemyUnit : MonoBehaviour
         }
 
         enemyHP.text = $"HP {currentHp}";
-        enemyShield.text = $"Shield {shieldForCurrentTurn}";
+        enemyShield.text = $"{shieldForCurrentTurn}";
     }
 
     public void TakeShield(int amount)
