@@ -41,7 +41,7 @@ public class PlayerCombat : MonoBehaviour
         if(hp != null)
             hp.text = $"HP: {PlayerRuntimeManager.Instance.currentHp}";
         if(shield != null)
-            shield.text = $"Shield: {shieldForCurrentTurn}";
+            shield.text = $"{shieldForCurrentTurn}";
         if(energy != null)
             energy.text = $"Energy: {currentEnergy}";
 
@@ -76,7 +76,7 @@ public class PlayerCombat : MonoBehaviour
         shieldForCurrentTurn += value;
         
         if(shield != null)
-            shield.text = $"Shield: {shieldForCurrentTurn}";
+            shield.text = $"{shieldForCurrentTurn}";
         Debug.Log($"Player got {value} shield for this turn. Shield: {shieldForCurrentTurn}");
     }
 
