@@ -29,6 +29,8 @@ public class CardEffectSettings
     public List<int> damageValues = new List<int>();
     public List<int> shieldValues = new List<int>();
     public List<int> playerLoseHpValues = new List<int>();
+    public List<int> gainReinforcementValues = new List<int>();
+    public List<int> gainStrengthValues = new List<int>();
 
     [Tooltip("0.0 = not healing, 1.0 = heal 100% on dealing damage")]
     [Range(0f, 3f)]
@@ -486,6 +488,12 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
         if (effects.healFromDamageMultiplier > 0)
             text += $"Heals for {(effects.healFromDamageMultiplier * 100f):0}% of dealt damage\n";
+        
+        if (effects.gainReinforcementValues != null && effects.gainReinforcementValues.Count > 0)
+            text += $"Gain Reinforcement: {string.Join(", ", effects.gainReinforcementValues)}\n";
+
+        if (effects.gainStrengthValues != null && effects.gainStrengthValues.Count > 0)
+            text += $"Gain Strength: {string.Join(", ", effects.gainStrengthValues)}\n";
 
         if (effects.energyCost > 0)
             text += $"Cost: {effects.energyCost} energy\n";
@@ -639,9 +647,16 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     
     private void ApplyEffectsByIndex(int wheelIndex, List<EnemyUnit> enemies)
     {
-        int damage = GetValueFromWheelIndex(effects.damageValues, wheelIndex);
-        int shield = GetValueFromWheelIndex(effects.shieldValues, wheelIndex);
+        int baseDamage = GetValueFromWheelIndex(effects.damageValues, wheelIndex);
+        int baseShield = GetValueFromWheelIndex(effects.shieldValues, wheelIndex);
         int loseHp = GetValueFromWheelIndex(effects.playerLoseHpValues, wheelIndex);
+
+        int gainReinforcement = GetValueFromWheelIndex(effects.gainReinforcementValues, wheelIndex);
+
+        int gainStrength = GetValueFromWheelIndex(effects.gainStrengthValues, wheelIndex);
+
+        int damage = playerCombat.GetDamageWithStrength(baseDamage);
+        int shield = playerCombat.GetShieldWithReinforcement(baseShield);
 
         int totalDamageDealt = 0;
         int healValue = 0;
@@ -663,23 +678,25 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
                 totalDamageDealt += dealt;
 
                 if (particleEffect != null)
-                    Instantiate(
-                        particleEffect,
-                        enemy.transform.position,
-                        Quaternion.identity
-                    );
+                {
+                    Instantiate(particleEffect, enemy.transform.position, Quaternion.identity);
+                }
             }
         }
 
         if (effects.healFromDamageMultiplier > 0f && totalDamageDealt > 0)
         {
-            healValue = Mathf.RoundToInt(
-                totalDamageDealt * effects.healFromDamageMultiplier
-            );
+            healValue = Mathf.RoundToInt(totalDamageDealt * effects.healFromDamageMultiplier);
 
             if (healValue > 0)
                 playerCombat.Heal(healValue);
         }
+
+        if (gainReinforcement > 0)
+            playerCombat.GainReinforcement(gainReinforcement);
+
+        if (gainStrength > 0)
+            playerCombat.GainStrength(gainStrength);
 
         if (effects.energyGainAfterPlay > 0)
             playerCombat.GainEnergy(effects.energyGainAfterPlay);
@@ -690,7 +707,9 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
             shield,
             loseHp,
             totalDamageDealt,
-            healValue
+            healValue,
+            gainReinforcement,
+            gainStrength
         );
 
         FinishPlay();
@@ -786,7 +805,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         rectTransform.localScale = baseScale;
     }
     
-    private void ShowPlayedValuesNotification(int wheelIndex, int damage, int shield, int loseHp, int totalDamageDealt, int healValue)
+    private void ShowPlayedValuesNotification(int wheelIndex, int damage, int shield, int loseHp, int totalDamageDealt, int healValue, int gainReinforcement, int gainStrength)
     {
         if (PlayedCardNotification.Instance == null)
             return;
@@ -804,6 +823,12 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
         if (loseHp > 0)
             message += $"Player lost HP: {loseHp}\n";
+
+        if (gainReinforcement > 0)
+            message += $"Reinforcement +{gainReinforcement}\n";
+
+        if (gainStrength > 0)
+            message += $"Strength +{gainStrength}\n";
 
         if (healValue > 0)
             message += $"Healed: {healValue}\n";

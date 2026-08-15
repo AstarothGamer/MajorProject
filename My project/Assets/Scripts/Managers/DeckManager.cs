@@ -14,10 +14,14 @@ public class DeckManager : MonoBehaviour
     public Transform handZone;
     public HandLayout handLayout;
     public Transform discardZone;
+    public Transform passivePileZone;
 
     private List<Card> drawPile = new List<Card>();
     private List<Card> discardPile = new List<Card>();
+    private List<Card> passivePile = new List<Card>();
     private List<Card> hand = new List<Card>();
+    
+    public int PassivePileCount => passivePile.Count;
 
     private void Start()
     {
@@ -93,13 +97,38 @@ public class DeckManager : MonoBehaviour
 
         discardPile.Add(card);
     }
+    
+    private void MoveToPassivePile(Card card)
+    {
+        if (card == null)
+            return;
+
+        card.ResetCardState();
+
+        card.gameObject.SetActive(false);
+
+        if (passivePileZone != null)
+            card.transform.SetParent(passivePileZone, false);
+
+        passivePile.Add(card);
+
+        Debug.Log($"Card [{card.cardName}] moved to PassivePile.");
+    }
 
     public void OnCardPlayed(Card card)
     {
         if (hand.Contains(card))
             hand.Remove(card);
 
-        MoveToDiscard(card);
+        if (card.cardType == CardType.Passive)
+        {
+            MoveToPassivePile(card);
+        }
+        else
+        {
+            MoveToDiscard(card);
+        }
+
         handLayout.UpdateLayout(hand);
     }
 

@@ -13,6 +13,14 @@ public class PlayerCombat : MonoBehaviour
 
     [Header("Shield")]
     public int shieldForCurrentTurn = 0;
+    
+    [Header("Buffs")]
+    [SerializeField] private int reinforcement = 0;
+    [SerializeField] private int strength = 0;
+    
+    public int Reinforcement => reinforcement;
+    public int Strength => strength;
+    
 
     [Header("Stats")] 
     [SerializeField] private TMP_Text hp;
@@ -176,4 +184,71 @@ public class PlayerCombat : MonoBehaviour
             energy.text = $"Energy: {currentEnergy}";
         Debug.Log($"Energy reset: {currentEnergy}/{maxEnergy}");
     }
+    
+   
+
+    #region Buffs
+    public void GainReinforcement(int value)
+    {
+        if (value <= 0)
+            return;
+
+        reinforcement += value;
+
+        Debug.Log($"Player gained {value} Reinforcement. Total Reinforcement: {reinforcement}");
+
+        if (FloatingCombatTextManager.Instance != null)
+        {
+            Vector3 textPosition = floatingTextPoint != null
+                ? floatingTextPoint.position
+                : transform.position;
+
+            FloatingCombatTextManager.Instance.SpawnText(
+                $"Reinforcement +{value}",
+                textPosition,
+                new Color(0.35f, 0.75f, 1f)
+            );
+        }
+    }
+    
+    public void GainStrength(int value)
+    {
+        if (value <= 0)
+            return;
+
+        strength += value;
+
+        Debug.Log($"Player gained {value} Strength. Total Strength: {strength}");
+
+        if (FloatingCombatTextManager.Instance != null)
+        {
+            Vector3 textPosition = floatingTextPoint != null
+                ? floatingTextPoint.position
+                : transform.position;
+
+            FloatingCombatTextManager.Instance.SpawnText(
+                $"Strength +{value}",
+                textPosition,
+                new Color(1f, 0.35f, 0.25f)
+            );
+        }
+    }
+
+    public int GetShieldWithReinforcement(int baseShield)
+    {
+        if (baseShield <= 0)
+            return 0;
+
+        return baseShield + reinforcement;
+    }
+
+    public int GetDamageWithStrength(int baseDamage)
+    {
+        if (baseDamage <= 0)
+            return 0;
+
+        return baseDamage + strength;
+    }
+    #endregion
+    
 }
