@@ -15058,6 +15058,8 @@ MonoBehaviour:
   maxEnergy: 3
   currentEnergy: 3
   shieldForCurrentTurn: 0
+  reinforcement: 0
+  strength: 0
   hp: {fileID: 2015700741}
   shield: {fileID: 1674270533}
   energy: {fileID: 572239160}
@@ -15794,6 +15796,7 @@ MonoBehaviour:
   currentAvailableLevel: {fileID: 0}
   drawPileCount: {fileID: 1623041281}
   discardPileCount: {fileID: 858380632}
+  passivePileCount: {fileID: 600211527}
   playerHealth: {fileID: 1252820406}
   playerEnergy: {fileID: 2047076931}
   deckManager: {fileID: 1359839829}
@@ -17011,6 +17014,7 @@ MonoBehaviour:
   handZone: {fileID: 520653274}
   handLayout: {fileID: 520653278}
   discardZone: {fileID: 279982795}
+  passivePileZone: {fileID: 1424231175}
 --- !u!4 &1359839830
 Transform:
   m_ObjectHideFlags: 0
@@ -17298,7 +17302,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_RaycastPadding: {x: 34.87, y: 27.58, z: 34.04, w: 27.57}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

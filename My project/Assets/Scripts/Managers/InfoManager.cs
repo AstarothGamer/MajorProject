@@ -8,6 +8,7 @@ public class InfoManager : MonoBehaviour
     [SerializeField] public TMP_Text currentAvailableLevel;
     [SerializeField] public TMP_Text drawPileCount;
     [SerializeField] public TMP_Text discardPileCount;
+    [SerializeField] public TMP_Text passivePileCount;
     [SerializeField] public TMP_Text playerHealth;
     [SerializeField] public TMP_Text playerEnergy;
     
@@ -50,6 +51,11 @@ public class InfoManager : MonoBehaviour
         if (playerEnergy != null)
         {
             playerEnergy.text = player.CurrentEnergy.ToString();
+        }
+
+        if (passivePileCount != null)
+        {
+            passivePileCount.text = deckManager.PassivePileCount.ToString();
         }
     }
 }

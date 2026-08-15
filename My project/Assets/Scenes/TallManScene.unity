@@ -12500,8 +12500,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InfoManager
   currentLevel: {fileID: 285749608}
   currentAvailableLevel: {fileID: 0}
-  drawPileCount: {fileID: 0}
+  drawPileCount: {fileID: 38969773}
   discardPileCount: {fileID: 2079804807}
+  passivePileCount: {fileID: 896001150}
   playerHealth: {fileID: 625666492}
   playerEnergy: {fileID: 241745363}
   deckManager: {fileID: 1563243394}
@@ -20429,7 +20430,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_RaycastPadding: {x: 34.81, y: 27.37, z: 33.78, w: 27.32}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -21507,6 +21508,8 @@ MonoBehaviour:
   maxEnergy: 3
   currentEnergy: 3
   shieldForCurrentTurn: 0
+  reinforcement: 0
+  strength: 0
   hp: {fileID: 222772877}
   shield: {fileID: 1901941807}
   energy: {fileID: 345666616}
@@ -21945,6 +21948,7 @@ MonoBehaviour:
   handZone: {fileID: 1852336794}
   handLayout: {fileID: 1852336795}
   discardZone: {fileID: 1424236889}
+  passivePileZone: {fileID: 1238384826}
 --- !u!4 &1563243395
 Transform:
   m_ObjectHideFlags: 0
