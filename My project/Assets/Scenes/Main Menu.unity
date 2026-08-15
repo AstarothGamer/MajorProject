@@ -708,8 +708,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeckRuntimeManager
   starterDeck:
-  - {fileID: 5508621081663610624, guid: 46199c1aa41053d42b5f2efcfef7bb47, type: 3}
-  - {fileID: 5508621081663610624, guid: 46199c1aa41053d42b5f2efcfef7bb47, type: 3}
+  - {fileID: 5508621081663610624, guid: db4e9b66b4b10a3418e3fe8bd5e3659a, type: 3}
+  - {fileID: 5508621081663610624, guid: db4e9b66b4b10a3418e3fe8bd5e3659a, type: 3}
   - {fileID: 5508621081663610624, guid: 46199c1aa41053d42b5f2efcfef7bb47, type: 3}
   - {fileID: 5508621081663610624, guid: 46199c1aa41053d42b5f2efcfef7bb47, type: 3}
   - {fileID: 5508621081663610624, guid: 46199c1aa41053d42b5f2efcfef7bb47, type: 3}
