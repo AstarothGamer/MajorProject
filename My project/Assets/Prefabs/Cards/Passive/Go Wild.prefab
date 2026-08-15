@@ -746,7 +746,7 @@ MonoBehaviour:
   rootCanvas: {fileID: 0}
   dragScale: 1.1
   dragFollowSmoothTime: 0.1
-  isRewardCard: 1
+  isRewardCard: 0
   selectionFrame: {fileID: 5319418481061510451}
   hoverScale: 1.15
   hoverLift: 70
