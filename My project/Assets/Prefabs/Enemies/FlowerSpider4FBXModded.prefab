@@ -1455,8 +1455,8 @@ MonoBehaviour:
   lowHpGlowImage: {fileID: 2895150674992067319}
   lowHpThreshold: 0.25
   glowColor: {r: 1, g: 0, b: 0, a: 1}
-  glowFrequency: 4
-  minGlowAlpha: 0.2
+  glowFrequency: 15
+  minGlowAlpha: 0
   maxGlowAlpha: 1
 --- !u!1 &4827403904967731793
 GameObject:
