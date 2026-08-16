@@ -15095,7 +15095,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f374775537136244971d3d8a28a828b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageShake
-  target: {fileID: 0}
+  target: {fileID: 1707137930662977699}
   duration: 0.25
   strength: 0.18
   vibrations: 12
@@ -28377,6 +28377,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9530297fca4d24d4390b6b1cd8b8659b, type: 3}
+--- !u!4 &1707137930662977699 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 528314150614337051, guid: 9530297fca4d24d4390b6b1cd8b8659b, type: 3}
+  m_PrefabInstance: {fileID: 1707137930662977698}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3355267576404894214
 PrefabInstance:
   m_ObjectHideFlags: 0
