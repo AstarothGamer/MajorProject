@@ -5777,6 +5777,7 @@ MonoBehaviour:
   currentAvailableLevel: {fileID: 0}
   drawPileCount: {fileID: 0}
   discardPileCount: {fileID: 0}
+  passivePileCount: {fileID: 0}
   playerHealth: {fileID: 993116622}
   playerEnergy: {fileID: 0}
   deckManager: {fileID: 0}
@@ -7532,6 +7533,8 @@ MonoBehaviour:
   - {fileID: 5508621081663610624, guid: c15dfae38f637bf46aa0d177878c43db, type: 3}
   - {fileID: 5508621081663610624, guid: ecf476b498764cc4582f805bc6451e28, type: 3}
   - {fileID: 866981556010156668, guid: 30d5f85091986e2428f95a4494755cd3, type: 3}
+  - {fileID: 5508621081663610624, guid: 210249cf556d91e4db153911cf54e036, type: 3}
+  - {fileID: 5508621081663610624, guid: db4e9b66b4b10a3418e3fe8bd5e3659a, type: 3}
   rewardPanel: {fileID: 2073716979}
   okButton: {fileID: 939713584}
   rewardHandLayout: {fileID: 246510733}
