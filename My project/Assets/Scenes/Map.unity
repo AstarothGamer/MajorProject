@@ -2879,6 +2879,7 @@ MonoBehaviour:
   currentAvailableLevel: {fileID: 324444025}
   drawPileCount: {fileID: 0}
   discardPileCount: {fileID: 0}
+  passivePileCount: {fileID: 0}
   playerHealth: {fileID: 582800634}
   playerEnergy: {fileID: 0}
   deckManager: {fileID: 0}
